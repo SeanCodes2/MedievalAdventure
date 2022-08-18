@@ -74,15 +74,15 @@ namespace AdventureLibrary
 
         //Constructors | camelCase of props | Public Access | Recreate default CTOR
 
-        public Location(string name, int id, string description, Location north, Location east, Location south, Location west, bool hasStore, int dangerLvl, bool hasLoot)
+        public Location(string name, int id, string description, /*Location north, Location east, Location south, Location west,*/ bool hasStore, int dangerLvl, bool hasLoot)
         {
             Name = name;
             Id = id;
             Description = description;
-            North = north;
-            East = east;
-            South = south;
-            West = west;
+            //North = north;
+            //East = east;
+            //South = south;
+            //West = west;
             HasStore = hasStore;
             DangerLvl = dangerLvl;
             HasLoot = hasLoot;
