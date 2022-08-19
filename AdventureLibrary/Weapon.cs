@@ -12,10 +12,7 @@ namespace AdventureLibrary
         private int _minDamage;
         private int _maxDamage;
         private string _name;
-        private int _bonusHitChance;
-        
-        private int _block;
-        
+        private int _bonusHitChance;  
 
         //Props | PascalCase of _fieldName | Public Access | Encapsulate the fields from users
 
@@ -51,9 +48,7 @@ namespace AdventureLibrary
         {
             get { return _bonusHitChance; }
             set { _bonusHitChance = value; }
-        }
-
-        
+        }        
 
         public int Block { get; set; }
 
