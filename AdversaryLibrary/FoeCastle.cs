@@ -9,11 +9,15 @@ namespace AdventureLibrary
     public class FoeCastle : Character
     {
         public int BlockBonus { get; set; }
+        public int MaxDmg { get; set; }
+        public int MinDmg { get; set; }
 
-        public FoeCastle(string name, int maxLife, int life, int hitChance, int block, int blockBonus)
+        public FoeCastle(string name, int maxLife, int life, int hitChance, int block, int blockBonus, int maxDmg, int minDmg)
             : base(name, maxLife, life, hitChance, block)
         {
             BlockBonus=blockBonus;
+            MaxDmg = maxDmg;
+            MinDmg = minDmg;
         }
 
         public override int CalcBlock()

@@ -9,11 +9,15 @@ namespace AdventureLibrary
     public class FoeMtnPass : Character
     {
         public bool IsBeastMode { get; set; }
+        public int MaxDmg { get; set; }
+        public int MinDmg { get; set; }
 
-        public FoeMtnPass(string name, int maxLife, int life, int hitChance, int block, bool isBeastMode)
+        public FoeMtnPass(string name, int maxLife, int life, int hitChance, int block, bool isBeastMode, int maxDmg, int minDmg)
             : base(name, maxLife, life, hitChance, block)
         {
             IsBeastMode = isBeastMode;
+            MaxDmg = maxDmg;
+            MinDmg = minDmg;
         }
 
         public override int CalcBlock()

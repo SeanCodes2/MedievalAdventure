@@ -1,6 +1,6 @@
 ﻿namespace AdventureLibrary
 {
-    public class Character
+    public abstract class Character
     {
         //Field | _camelCase | Access Modifier Private
         private int _life;
@@ -87,8 +87,8 @@
         }
         public virtual int CalcDamage()
         {
-            int damage = 0;
-            return damage;
+            
+            return 0;
         }
     }
 }

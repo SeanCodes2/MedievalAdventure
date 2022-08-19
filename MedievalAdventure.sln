@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project", "Project\Project.csproj", "{EB79C94F-7B83-46DB-8CAD-6EF8A34A7BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project", "Project\Project.csproj", "{EB79C94F-7B83-46DB-8CAD-6EF8A34A7BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureLibrary", "AdventureLibrary\AdventureLibrary.csproj", "{A2507D4C-8A4B-4A24-8093-B91B46273DF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventureLibrary", "AdventureLibrary\AdventureLibrary.csproj", "{A2507D4C-8A4B-4A24-8093-B91B46273DF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdversaryLibrary", "AdversaryLibrary\AdversaryLibrary.csproj", "{CAF8E5F6-FBC3-47B7-BB9D-10527BEBF515}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A2507D4C-8A4B-4A24-8093-B91B46273DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2507D4C-8A4B-4A24-8093-B91B46273DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2507D4C-8A4B-4A24-8093-B91B46273DF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAF8E5F6-FBC3-47B7-BB9D-10527BEBF515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF8E5F6-FBC3-47B7-BB9D-10527BEBF515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF8E5F6-FBC3-47B7-BB9D-10527BEBF515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF8E5F6-FBC3-47B7-BB9D-10527BEBF515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

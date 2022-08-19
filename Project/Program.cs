@@ -7,9 +7,10 @@ namespace Project
     internal class Program
     {
         static void Main(string[] args)
-        {        
+        {
             bool adventureLoop = true;
             Random rand1 = new Random();
+            Console.WriteLine("");
 
             do
             {
@@ -19,10 +20,10 @@ namespace Project
 
                 #region Weapons and Shields
                 Weapon butterKnife = new Weapon("Butter Knife", 7, 2, 9, 1);
-                Weapon katana = new Weapon("Katana", 12, 10, 6,  2);
+                Weapon katana = new Weapon("Katana", 12, 10, 10, 2);
                 Weapon dagger = new Weapon("Dagger", 8, 4, 8, 1);
                 Weapon spear = new Weapon("Short Spear", 15, 6, 5, 3);
-                Weapon mace = new Weapon("Mace", 18, 7, 4, 2);                
+                Weapon mace = new Weapon("Mace", 18, 7, 4, 2);
                 List<Weapon> weapons = new List<Weapon>()
                     { butterKnife, katana, dagger, spear, mace };
 
@@ -30,24 +31,32 @@ namespace Project
                 Shield kite = new Shield("Kite Shield", 7);
                 Shield heater = new Shield("Heater Shield", 10);
                 Shield none = new Shield();
+                List<Shield> shields = new List<Shield>()
+                    { buckler, kite, heater, none };
                 #endregion
 
-                Player user = new Player("Adventurer", 100, 100, 0, 0,  katana, buckler, 5);
-                user.Block = user.CalcBlock();
-                user.HitChance = user.CalcHitChance();
+                Player user = new Player("Sir Robin", Class.Balanced, 100, 100, 50, 0, katana, buckler,50, 5);
+                
+                
 
-                Console.WriteLine("\t\t\t\t\t*****PLAYER*****");
-                Console.WriteLine(user);
-                Console.WriteLine(user.EquippedWeapon);              
-                Console.WriteLine(user.EquippedShield);
+                Console.WriteLine("\n\t\t\t\t\t*****PLAYER*****\n");
+                Console.WriteLine($"\t\t\tPlayer: {user.Name} --- Weapon: {user.EquippedWeapon.Name} --- Shield: {user.EquippedShield.Name}\n\n");
+                
 
                 Console.WriteLine("\t\t\t\t\t*****Adversary*****\n");
 
                 #region Adversarys
+
                 
-                FoeSewer rat = new FoeSewer("Rat", 20, 20, 3, 1, true);
+
+                FoeSwamp turtoise = new FoeSwamp("Super Turtle", 25, 25, 5, 2, 2, 6, 4);
+                FoeSwamp reaper = new FoeSwamp("Reaper Tree", 30, 30, 5, 3, 3, 7, 5);
+
+
+
                 #endregion
-                Console.WriteLine(rat);
+
+                Console.WriteLine($"\t\t\t\t\tName: {reaper.Name} --- Health: {reaper.Life}");
                 Console.Write("Press any key to enter encounter:\n\n");
                 Console.ReadKey(true);
 
@@ -56,7 +65,7 @@ namespace Project
                     Console.Write("Choose Your Next Move:\n" +
                        "A. Attack\n" +
                        "B. Run Away\n" +
-                       "C. Character Info\n" +
+                       "C. Player Info\n" +
                        "D. Monster Info\n" +
                        "E. Exit\n\n\n");
                     string choice = Console.ReadKey(true).Key.ToString();
@@ -92,12 +101,15 @@ namespace Project
                             break;
 
                         case "C":
-                            Console.WriteLine($"Character Info");
+                            Console.WriteLine($"{user}");
+                            Console.WriteLine(katana);
+                            Console.WriteLine(buckler);
 
                             break;
 
                         case "D":
                             Console.WriteLine("Monster Info");
+                            Console.WriteLine(reaper);
                             break;
 
                         case "E":
@@ -118,11 +130,13 @@ namespace Project
 
 
 
-                } while (encounterLoop);
+                } while (encounterLoop && adventureLoop);
             } while (adventureLoop);
 
         }//End Main()
 
-       
+
+
+
     }//End Class
 }//End Namespace
