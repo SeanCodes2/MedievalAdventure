@@ -8,6 +8,7 @@
         private int _hitChance;
         private int _block;
         private int _maxLife;
+        
 
 
         //Props | PascalCase of _fieldName | Public Access | Encapsulate the fields from users
@@ -17,7 +18,7 @@
             get { return _life; }
             set
             {
-                if (_life > _maxLife)
+                if (value > _maxLife)
                 {
                     _life = _maxLife;
                 }
@@ -52,7 +53,12 @@
             set { _maxLife = value; }
         }
 
+        
+
+
         //Constructors | camelCase of props | Public Access | Recreate default CTOR
+
+        public Character() { }
 
         public Character(string name, int maxLife, int life, int hitChance, int block)
         {
@@ -60,27 +66,29 @@
             MaxLife = maxLife;
             Life = life;
             HitChance = hitChance;
-            Block = block;
+            Block = block;            
+            
         }
 
         //Methods | Actions related to or using props of our object
         public override string ToString()
         {
-            return $"Name: {Name}\n" +
-                $"MaxLife: {MaxLife}\n" +
-                $"Life: {Life}\n" +
-                $"Blocking: {Block}\n" +
-                $"Hit Chance: {HitChance}\n";
+            return $"\t|  NAME: {Name} | MaxLife: {MaxLife} | Life: {Life} | Blocking: {Block} | Hit Chance: {HitChance}\n";
         }
 
-        public int CalcBlock()
+        public virtual int CalcBlock()
         {
             return Block;
         }
 
-        public int CalcHitChance()
+        public virtual int CalcHitChance()
         {
             return HitChance;
+        }
+        public virtual int CalcDamage()
+        {
+            int damage = 0;
+            return damage;
         }
     }
 }

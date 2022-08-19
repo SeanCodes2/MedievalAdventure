@@ -81,12 +81,14 @@ namespace Project
                 {mountain.Id, mountain},
             };
 
-            Console.WriteLine($"\n\t\t\t\t\tNorth: {locations[Id].North.Name} \n\n\n" +
-                    $"\t\tWest: {locations[Id].West.Name}" +
-                    $"\n\t\t\t\t\t\t\t\t\tEast: {locations[Id].East.Name}\n\n\n" +
-                    $"\t\t\t\t\tSouth: {locations[Id].South.Name}\n\n\n\n" +
-                $"Current Location: {locations[Id].Name} - {locations[Id].Description}\n\n" +
-                    $"\t\t|- Store? {(locations[Id].HasStore ? "Yes" : "No")} -|- Loot? {(locations[Id].HasLoot ? "Yes" : "No")} -|- Danger Level: {locations[Id].DangerLvl} -|\n\n\n");
+            Console.WriteLine($"\n\t\t\t\t\tNORTH: {locations[Id].North.Name} \n\n\n" +
+                    $"\t\tWEST: {locations[Id].West.Name}" +
+                    $"\n\t\t\t\t\t\t\t\t\tEAST: {locations[Id].East.Name}\n\n\n" +
+                    $"\t\t\t\t\tSOUTH: {locations[Id].South.Name}\n\n\n" +
+                $"\t\tCURRENT LOCATION: {locations[Id].Name} - {locations[Id].Description}\n\n" +
+                    //$"\t\t|||- Store? {(locations[Id].HasStore ? "Yes" : "No")} -|||- Loot? {(locations[Id].HasLoot ? "Yes" : "No")} -|||- Danger Level: {locations[Id].DangerLvl} -|||\n" +
+                    $"______________________________________________________________________________________________________________\n" +
+                    $"______________________________________________________________________________________________________________");
 
 
 

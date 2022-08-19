@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class Adversary
+    public class FoeThief : Character
     {
+        public int MyProperty { get; set; }
     }
 }
