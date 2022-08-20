@@ -70,7 +70,13 @@ namespace AdventureLibrary
 
         public override string ToString()
         {
-            return $"\n|  NAME: {Name}  |  Class: {PlayerClass}  |  Life: {Life}/{MaxLife} |  Hit Chance: {CalcHitChance()}  |  Escape Chance: {EscapeChance}  |  Block: {CalcBlock()}  |  Gold: {Gold}\n\n";         
+            return $"\nNAME: {Name}\n" +
+                $"Class: {PlayerClass}\n" +
+                $"Life: {Life}/{MaxLife}\n" +
+                $"Hit Chance: {CalcHitChance()}\n" +
+                $"Escape Chance: {EscapeChance}\n" +
+                $"Block: {CalcBlock()}\n" +
+                $"Gold: {Gold}\n\n";         
         }
 
         public override int CalcBlock()

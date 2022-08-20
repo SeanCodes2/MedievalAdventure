@@ -70,7 +70,9 @@ namespace AdventureLibrary
                 public override string ToString()
         {
             //return base.ToString();
-            return $"\t\tWEAPON: {Name} | HitChance: {BonusHitChance} | MinDamage: {MinDamage} | MaxDamage: {MaxDamage}\n";
+            return $"WEAPON: {Name} " +
+                $"HitChance: {BonusHitChance} " +
+                $"Damage: {MinDamage}-{MaxDamage} ";
         }
 
         public static Weapon GetWeapon(int index)
