@@ -20,6 +20,7 @@ namespace AdventureLibrary
         private int _dangerLvl;
         private bool _hasLoot;
 
+
         //Props | PascalCase of _fieldName | Public Access | Encapsulate the fields from users
         public string Name
         {

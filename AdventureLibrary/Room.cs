@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,14 +10,9 @@ namespace Project
 {
     public class Room
     {
-        public static void GetRoom(int Id)
+        public static Location GetRoom(int id)
 
-        {
-            #region LocationObjects
-            #region innerObject
-
-
-
+        {            
             Location mountain = new Location("Inaccessable Mountain", 19, "Vast formations of rock and snow. No getting through there..", false, 0, false);
             Location ocean = new Location("Inaccessable Ocean", 18, "An Impassible body of water.", false, 0, false);
             Location inn = new Location("Inn", 01, "A place to seek out lodging to rest.", true, 0, false);
@@ -56,45 +52,15 @@ namespace Project
             forest5.North = mountain; forest1.East = ocean; forest1.South = forest6; forest1.West = forest3;
             forest6.North = forest5; forest1.East = ocean; forest1.South = castle; forest1.West = forest4;
 
-            #endregion
-
-            var locations = new Dictionary<int, Location>()
+            List<Location> rooms = new List<Location>()
             {
-                {inn.Id, inn},
-                {provisioner.Id, provisioner},
-                {sewer.Id, sewer},
-                {graveyard.Id,graveyard},
-                {castle.Id,castle},
-                {mtnPass.Id, mtnPass},
-                {road1.Id, road1},
-                {road2.Id, road2},
-                {road3.Id, road3},
-                {swamp1.Id, swamp1},
-                {swamp2.Id, swamp2},
-                {forest1.Id, forest1},
-                {forest2.Id, forest2},
-                {forest3.Id, forest3},
-                {forest4.Id, forest4},
-                {forest5.Id, forest5},
-                {forest6.Id, forest6},
-                {ocean.Id,ocean},
-                {mountain.Id, mountain},
-            };
-
-            Console.WriteLine($"\n\t\t\t\t\tNORTH: {locations[Id].North.Name} \n\n\n" +
-                    $"\t\tWEST: {locations[Id].West.Name}" +
-                    $"\n\t\t\t\t\t\t\t\t\tEAST: {locations[Id].East.Name}\n\n\n" +
-                    $"\t\t\t\t\tSOUTH: {locations[Id].South.Name}\n\n\n" +
-                $"\t\tCURRENT LOCATION: {locations[Id].Name} - {locations[Id].Description}\n\n" +
-                    //$"\t\t|||- Store? {(locations[Id].HasStore ? "Yes" : "No")} -|||- Loot? {(locations[Id].HasLoot ? "Yes" : "No")} -|||- Danger Level: {locations[Id].DangerLvl} -|||\n" +
-                    $"______________________________________________________________________________________________________________\n" +
-                    $"______________________________________________________________________________________________________________");
-
-
-
-
-
-            #endregion
-        }
+                inn, provisioner, sewer, graveyard,castle,mtnPass,road1,road2,road3,swamp1,swamp2,forest1,forest2,forest3,forest4,forest5,forest6
+            }; 
+            
+            Location currentLocation = rooms[id -1];
+            return currentLocation;
+            
+        }//end GetRoom()
+               
     }
 }
