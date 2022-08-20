@@ -41,16 +41,16 @@ namespace Project
             castle.North = forest6; castle.East = ocean; castle.South = swamp2; castle.West = road1;
             mtnPass.North = mountain; mtnPass.East = road3; mtnPass.South = mountain; mtnPass.West = mountain;
             road1.North = forest4; road1.East = castle; road1.South = swamp1; road1.West = inn;
-            road2.North = forest4; road2.East = forest4; road2.South = swamp1; road2.West = forest2;
+            road2.North = graveyard; road2.East = forest4; road2.South = swamp1; road2.West = forest2;
             road3.North = provisioner; road3.East = inn; road3.South = ocean; road3.West = mtnPass;
             swamp1.North = road1; swamp1.East = swamp2; swamp1.South = ocean; swamp1.West = sewer;
-            swamp2.North = castle; swamp1.East = ocean; swamp1.South = ocean; swamp1.West = swamp1;
+            swamp2.North = castle; swamp2.East = ocean; swamp2.South = ocean; swamp2.West = swamp1;
             forest1.North = mountain; forest1.East = graveyard; forest1.South = forest2; forest1.West = mountain;
-            forest2.North = forest1; forest1.East = road2; forest1.South = provisioner; forest1.West = mountain;
-            forest3.North = mountain; forest1.East = forest5; forest1.South = forest4; forest1.West = graveyard;
-            forest4.North = forest3; forest1.East = forest5; forest1.South = road1; forest1.West = road2;
-            forest5.North = mountain; forest1.East = ocean; forest1.South = forest6; forest1.West = forest3;
-            forest6.North = forest5; forest1.East = ocean; forest1.South = castle; forest1.West = forest4;
+            forest2.North = forest1; forest2.East = road2; forest2.South = provisioner; forest2.West = mountain;
+            forest3.North = mountain; forest3.East = forest5; forest3.South = forest4; forest3.West = graveyard;
+            forest4.North = forest3; forest4.East = forest5; forest4.South = road1; forest4.West = road2;
+            forest5.North = mountain; forest5.East = ocean; forest5.South = forest6; forest5.West = forest3;
+            forest6.North = forest5; forest6.East = ocean; forest6.South = castle; forest6.West = forest4;
 
             List<Location> rooms = new List<Location>()
             {

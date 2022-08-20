@@ -38,6 +38,12 @@ namespace AdventureLibrary
 
             return forestRoadFoes[new Random().Next(forestRoadFoes.Count)];
         }
-
+        public override string ToString()
+        {
+            return $"\n\nName: {Name}\n" +
+                $"Life: {Life}/{MaxLife}\n" +
+                $"Damage: {MinDmg}-{MaxDmg}\n" +
+                $"HitChance: {HitChance} Block: {Block}";
+        }
     }
 }

@@ -21,11 +21,14 @@ namespace Project
             var charClass = Enum.GetValues(typeof(CharacterClass));
             int Index = 1;
             Console.WriteLine("\nPlease select a class: ");
+
+
             foreach (var type in charClass)
             {
                 Console.WriteLine($"{Index}) {type}");
                 Index++;
             }
+                        
             int userInput = int.Parse(Console.ReadLine()) - 1;//Subtract 1 to make zero based
             CharacterClass playerClass = (CharacterClass)userInput;
             #endregion
@@ -43,19 +46,13 @@ namespace Project
             bool adventureLoop = true;
             do
             {
+
                 Location currentRoom = Room.GetRoom(1);
-
-
-                //Console.Write("Press any key to enter encounter:\n\n");
-                //Console.ReadKey(true);
-
 
                 bool encounterLoop = true;
                 do
-                {
-                    string displayMenu;
+                {                    
                     ConsoleKey menuChoice;
-
 
                     Console.WriteLine($"\n\n\t\t\t\t\tNORTH: {currentRoom.North.Name} \n\n\n" +
                         $"\t\tWEST: {currentRoom.West.Name}" +
@@ -377,35 +374,34 @@ namespace Project
                            "\tM. Monster Info\n" +
                            "\tE. Exit\n\n\n");
 
-
                         ConsoleKey choice = Console.ReadKey(true).Key;
-                        Console.Clear();
+                        /*Console.Clear();*/
 
                         switch (choice)
                         {
                             case ConsoleKey.UpArrow:
+                                currentRoom = currentRoom.North;
                                 Console.WriteLine("You Move North\n" + "Press any Key to Continue");
                                 Console.ReadKey();
                                 Console.Clear();
-                                currentRoom = currentRoom.North;
                                 break;
                             case ConsoleKey.RightArrow:
+                                currentRoom = currentRoom.East;
                                 Console.WriteLine("You Move East\n" + "Press any Key to Continue");
                                 Console.ReadKey();
                                 Console.Clear();
-                                currentRoom = currentRoom.East;
                                 break;
                             case ConsoleKey.DownArrow:
+                                currentRoom = currentRoom.South;
                                 Console.WriteLine("You Move South\n" + "Press any Key to Continue");
                                 Console.ReadKey();
                                 Console.Clear();
-                                currentRoom = currentRoom.South;
                                 break;
                             case ConsoleKey.LeftArrow:
+                                currentRoom = currentRoom.West;
                                 Console.WriteLine("You Move West\n" + "Press any Key to Continue");
                                 Console.ReadKey();
                                 Console.Clear();
-                                currentRoom = currentRoom.West;
                                 break;
                             case ConsoleKey.A:
 
@@ -435,12 +431,6 @@ namespace Project
                                 Console.WriteLine("Unknown Command - Please try again.");
                                 break;
                         }//end switch
-                        if (encounterLoop)
-                        {
-                            Console.WriteLine("Press Any Key to Continue");
-                            Console.ReadKey();
-                            Console.Clear();
-                        }//end if
                     }
 
 
