@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public enum Class
+    public enum CharacterClass
     {
         Balanced,
         Dexer,

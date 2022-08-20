@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdversaryLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,28 +7,37 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class FoeForestRoad : Character 
+    public class FoeForestRoad : Adversary 
     {
         public bool IsShady { get; set; }
-        public int MaxDmg { get; set; }
-        public int MinDmg { get; set; }
 
-        public FoeForestRoad(string name, int maxLife, int life, int hitChance, int block, bool isShady, int maxDmg, int minDmg)
-            : base(name, maxLife, life, hitChance, block)
+        public FoeForestRoad(string name, int maxLife, int life, int maxDmg, int minDmg, int hitChance, int block, bool isShady) : base(name, maxLife, life, maxDmg, minDmg, hitChance, block)
         {
             IsShady = isShady;
-            MaxDmg = maxDmg;
-            MinDmg = minDmg;
         }
 
         public override int CalcBlock()
-        {            
-            int block = 0;
+        {
+            int result = Block;
             if (IsShady)
             {
-                block += 3;
+                result += Block / 2;
             }
-            return block;
+            return result;
         }
+
+        public static FoeForestRoad GetForestRoadFoe()
+        {
+            FoeForestRoad mongbat = new FoeForestRoad("Mongbat", 20, 20, 3, 1, 5, 3, false);
+            FoeForestRoad spider = new FoeForestRoad("Giant Spider", 25, 25, 4, 2, 6, 4, false); ;
+            FoeForestRoad ettin = new FoeForestRoad("Ettin", 30, 30, 5, 4, 7, 5, false);
+            FoeForestRoad ogre = new FoeForestRoad("Ogre", 35, 35, 6, 2, 8, 6, false);
+            Adversary none = new Adversary();
+            List<FoeForestRoad> forestRoadFoes = new List<FoeForestRoad>()
+                { mongbat, spider, ettin, ogre,};
+
+            return forestRoadFoes[new Random().Next(forestRoadFoes.Count)];
+        }
+
     }
 }

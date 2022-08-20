@@ -15,57 +15,82 @@ namespace AdventureLibrary
         public Shield EquippedShield { get; set; }
         public int EscapeChance { get; set; }
         public int Gold { get; set; }
+        public CharacterClass PlayerClass { get; set; }
+        public int BonusDamage { get; set; }
 
-        public Class PlayerClass { get; set; }
 
 
-
-        public Player(string name, Class playerClass, int maxLife, int life, int hitChance, int block, Weapon equippedWeapon, Shield equippedShield,int escapeChance,  int gold )
+        public Player(string name, CharacterClass playerClass, int maxLife, int life, int hitChance, int block, Weapon equippedWeapon, Shield equippedShield,int escapeChance, int bonusDamage, int gold )
             : base(name, maxLife, life, hitChance, block)
         {
             PlayerClass = playerClass;
             EquippedWeapon = equippedWeapon;
             EquippedShield = equippedShield;
             EscapeChance = escapeChance;
+            BonusDamage = bonusDamage;
             Gold = gold;
+
+            switch (playerClass)
+            {
+                case CharacterClass.Balanced:
+                    break;
+                case CharacterClass.Dexer:
+                    HitChance += 10;
+                    MaxLife -= 5;
+                    Life -= 5;
+                    break;
+                case CharacterClass.Tank:
+                    Block += 5;
+                    EscapeChance -= 10;
+                    HitChance -= 5;
+                    MaxLife += 10;
+                    Life +=10;
+                    break;
+                case CharacterClass.Berzerker:
+                    Block -= 10;
+                    BonusDamage +=5;
+                    EscapeChance -=10;
+                    break;
+                case CharacterClass.Peasant:
+                    Block -= 3;
+                    EscapeChance -= 3;
+                    HitChance -= 3;
+                    MaxLife -= 10;
+                    Life -= 10;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public Player()
         {
-            Name = "Player1";
-            PlayerClass = Class.Balanced;
-            MaxLife = 100;
-            Life = 100;
-            HitChance = 70;
-            EscapeChance = 50;
-            Block = 0;
-            Gold = 5;       
-        }
+           
+        }        
 
         public override string ToString()
         {
-            return $"\n\t|  NAME: {Name}  |  Class: {PlayerClass}  |  Life: {Life}/{MaxLife}\n" +
-                $"\t|  Hit Chance: {CalcHitChance()}  |  Escape Chance: {EscapeChance}  |  Block: {CalcBlock()}  |  Gold: {Gold}\n";
+            return $"\n|  NAME: {Name}  |  Class: {PlayerClass}  |  Life: {Life}/{MaxLife} |  Hit Chance: {CalcHitChance()}  |  Escape Chance: {EscapeChance}  |  Block: {CalcBlock()}  |  Gold: {Gold}\n\n";         
         }
 
         public override int CalcBlock()
         {
             return (EquippedShield.Block + EquippedWeapon.Block);
         }
-     
 
         public override int CalcHitChance()
         {
-            int hitChance = 50;
-            return  hitChance + EquippedWeapon.BonusHitChance;
+            return base.CalcHitChance() + EquippedWeapon.BonusHitChance;
         }
 
         public override int CalcDamage()
         {
-            Random random = new Random();
-            int damage = 0;
-            damage = random.Next(EquippedWeapon.MinDamage, EquippedWeapon.MaxDamage);
-            return damage;
+            return new Random().Next(EquippedWeapon.MinDamage, EquippedWeapon.MaxDamage + 1) + BonusDamage;
+        }
+
+        public int CalcEscape()
+        {
+            return EscapeChance;
         }
 
     }

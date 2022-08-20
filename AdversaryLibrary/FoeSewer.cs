@@ -7,51 +7,39 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class FoeSewer : Monster
+    public class FoeSewer : Adversary
     {
         public bool IsSlimy { get; set; }
-
-        public int MaxDmg { get; set; }
-        public int MinDmg { get; set; }
-
-        public FoeSewer(string name, int maxLife, int life, int hitChance, int block, bool isSlimy, int maxDmg, int minDmg)
-            : base (name, maxLife, life, hitChance, block)
+                
+        public FoeSewer(string name, int maxLife, int life, int maxDmg, int minDmg, int hitChance, int block, bool isSlimy) : base(name, maxLife, life, maxDmg, minDmg, hitChance, block)
         {
             IsSlimy = isSlimy;
-            MaxDmg = maxDmg;
-            MinDmg = minDmg;
         }
-
+              
         public override int CalcBlock()
-        {   
-            int block = 0;
+        {
+            int result = Block;
             if (IsSlimy)
             {
-                block += 2;
+                result += Block / 2;
             }
-            return block;
+            return result;
         }
 
-        public override int CalcDamage()
+        public static FoeSewer GetSewerFoe()
         {
-
-            
-            return base.CalcDamage();
-        }
-
-        public static FoeSewer GetSewer()
-        {
-            FoeSewer rat = new FoeSewer("Rat", 20, 20, 3, 1, true, 5, 3);
-            FoeSewer slime = new FoeSewer("Slime", 25, 25, 4, 2, true, 6, 4);
-            FoeSewer serpent = new FoeSewer("Serpent", 30, 30, 5, 4, true, 7, 5);
-            FoeSewer alligator = new FoeSewer("Alligator", 35, 35, 6, 2, true, 8, 6);
-            //List<FoeSewer> sewerFoes = new List<FoeSewer>()
-            //    { rat, slime, serpent, alligator };
+            FoeSewer rat = new FoeSewer("Rat", 20, 20, 3, 1, 5, 3, false);
+            FoeSewer slime = new FoeSewer("Slime", 25, 25, 4, 2, 6, 4, false); ;
+            FoeSewer serpent = new FoeSewer("Serpent", 30, 30, 5, 4, 7, 5, false);
+            FoeSewer alligator = new FoeSewer("Alligator", 35, 35, 6, 2, 8, 6, false);
             List<FoeSewer> sewerFoes = new List<FoeSewer>()
-           {
-               rat, slime,serpent,alligator
-           };
+                { rat, slime, serpent, alligator };
+            
             return sewerFoes[new Random().Next(sewerFoes.Count)];
+        }
+        public override string ToString()
+        {
+            return $"{GetSewerFoe()}";
         }
     }
 }
