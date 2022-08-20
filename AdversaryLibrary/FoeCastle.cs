@@ -31,6 +31,14 @@ namespace AdventureLibrary
                 { guard, captain, knight, king };
 
             return castleFoes[new Random().Next(castleFoes.Count)];
+
+        }
+        public override string ToString()
+        {
+            return $"\n\nName: {Name}\n" +
+                $"Life: {Life}/{MaxLife}\n" +
+                $"Damage: {MinDmg}-{MaxDmg}\n" +
+                $"HitChance: {HitChance} Block: {Block}";
         }
     }
 }
