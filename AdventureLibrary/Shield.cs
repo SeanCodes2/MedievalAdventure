@@ -20,7 +20,8 @@ namespace AdventureLibrary
 
         public override string ToString()
         {
-            return $"\t\tSHIELD: {Name} | Block: {Block}\n";                
+            return $"SHIELD: {Name} " +
+                $"Block: {Block}\n";                
         }
 
         public static Shield GetShield(int index)
