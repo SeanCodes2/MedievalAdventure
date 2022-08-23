@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class FoeSewer : Adversary
+    public sealed class FoeSewer : Adversary
     {
         public bool IsSlimy { get; set; }
 
@@ -28,10 +28,10 @@ namespace AdventureLibrary
 
         public static FoeSewer GetSewerFoe()
         {
-            FoeSewer rat = new FoeSewer("Rat", 15, 15, 4, 1, 40, 3, false);
-            FoeSewer slime = new FoeSewer("Slime", 18, 18, 5, 2, 40, 4, false); ;
-            FoeSewer serpent = new FoeSewer("Serpent", 23, 23, 6, 2, 40, 5, false);
-            FoeSewer alligator = new FoeSewer("Alligator", 28, 328, 7, 2, 40, 6, false);
+            FoeSewer rat = new FoeSewer("Rat", 15, 15, 4, 1, 30, 3, false);
+            FoeSewer slime = new FoeSewer("Slime", 18, 18, 4, 2, 30, 3, false); ;
+            FoeSewer serpent = new FoeSewer("Serpent", 23, 23,5, 2, 30, 4, false);
+            FoeSewer alligator = new FoeSewer("Alligator", 28, 28, 5, 2, 30, 4, false);
             List<FoeSewer> sewerFoes = new List<FoeSewer>()
                 { rat, slime, serpent, alligator };
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class FoeForestRoad : Adversary 
+    public sealed class FoeForestRoad : Adversary
     {
         public bool IsShady { get; set; }
 
@@ -28,10 +28,10 @@ namespace AdventureLibrary
 
         public static FoeForestRoad GetForestRoadFoe()
         {
-            FoeForestRoad mongbat = new FoeForestRoad("Mongbat", 20, 20, 3, 1, 5, 3, false);
-            FoeForestRoad spider = new FoeForestRoad("Giant Spider", 25, 25, 4, 2, 6, 4, false); ;
-            FoeForestRoad ettin = new FoeForestRoad("Ettin", 30, 30, 5, 4, 7, 5, false);
-            FoeForestRoad ogre = new FoeForestRoad("Ogre", 35, 35, 6, 2, 8, 6, false);
+            FoeForestRoad mongbat = new FoeForestRoad("Mongbat", 23, 23, 6, 2, 40, 6, false);
+            FoeForestRoad spider = new FoeForestRoad("Giant Spider", 28, 28, 6, 2, 40, 6, false); ;
+            FoeForestRoad ettin = new FoeForestRoad("Ettin", 31, 31, 7, 3, 40, 7, false);
+            FoeForestRoad ogre = new FoeForestRoad("Ogre", 36, 36, 7, 3, 40, 7, false);
             Adversary none = new Adversary();
             List<FoeForestRoad> forestRoadFoes = new List<FoeForestRoad>()
                 { mongbat, spider, ettin, ogre,};

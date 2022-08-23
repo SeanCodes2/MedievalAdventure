@@ -70,18 +70,18 @@ namespace AdventureLibrary
                 public override string ToString()
         {
             //return base.ToString();
-            return $"WEAPON: {Name} " +
-                $"HitChance: {BonusHitChance} " +
+            return $"WEAPON: {Name} | " +
+                $"HitChance: {BonusHitChance} | " +
                 $"Damage: {MinDamage}-{MaxDamage} ";
         }
 
         public static Weapon GetWeapon(int index)
         {
-            Weapon butterKnife = new Weapon("Butter Knife", 7, 2, 9, 1);
-            Weapon katana = new Weapon("Katana", 12, 10, 10, 2);
-            Weapon dagger = new Weapon("Dagger", 8, 4, 8, 1);
-            Weapon spear = new Weapon("Short Spear", 15, 6, 5, 3);
-            Weapon mace = new Weapon("Mace", 18, 7, 4, 2);
+            Weapon butterKnife = new Weapon("Butter Knife", 7, 2, 8, 1);
+            Weapon katana = new Weapon("Katana", 12, 6, 9, 2);
+            Weapon dagger = new Weapon("Dagger", 8, 4, 10, 1);
+            Weapon spear = new Weapon("Short Spear", 15, 6, 11, 3);
+            Weapon mace = new Weapon("Mace", 18, 7, 12, 2);
 
             List<Weapon> weapons = new List<Weapon>()
                     { butterKnife, katana, dagger, spear, mace };

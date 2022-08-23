@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class FoeSwamp : Adversary
+    public sealed class FoeSwamp : Adversary
     {
         public int BonusHitChance { get; set; }
 
@@ -25,10 +25,10 @@ namespace AdventureLibrary
 
         public static FoeSewer GetSwampFoe()
         {
-            FoeSewer turtoise = new FoeSewer("Turtoise", 20, 20, 3, 1, 5, 3, false);
-            FoeSewer reaper = new FoeSewer("Reaper", 25, 25, 4, 2, 6, 4, false);
-            FoeSewer bogThing = new FoeSewer("Bog Thing", 30, 30, 5, 4, 7, 5, false);
-            FoeSewer swampTenticle = new FoeSewer("Swamp Tenticle", 35, 35, 6, 2, 8, 6, false);
+            FoeSewer turtoise = new FoeSewer("Turtoise", 23, 23, 5, 2, 40, 5, false);
+            FoeSewer reaper = new FoeSewer("Reaper", 28, 28, 5, 2, 40, 5, false);
+            FoeSewer bogThing = new FoeSewer("Bog Thing", 31, 31, 6, 3, 40, 6, false);
+            FoeSewer swampTenticle = new FoeSewer("Swamp Tenticle", 36, 36, 6, 3, 40, 6, false);
             List<FoeSewer> swampFoes = new List<FoeSewer>()
                 {turtoise,reaper,bogThing,swampTenticle};
 

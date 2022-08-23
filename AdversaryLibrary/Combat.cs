@@ -50,5 +50,18 @@ namespace AdversaryLibrary
                 DoAttack(adversary, player);
             }
         }
+
+        public static void TryEscape(Character adversary,Player player)
+        {
+            Random rand = new Random();
+            int diceRoll = rand.Next(1, 101);
+
+            if (diceRoll < player.EscapeChance)
+            {
+                Console.WriteLine($"{adversary.Name} Attacks you as you travel");
+                Combat.DoAttack(adversary,player);
+                Console.ReadKey();
+            }
+        }
     }
 }

@@ -20,16 +20,16 @@ namespace AdventureLibrary
 
         public override string ToString()
         {
-            return $"SHIELD: {Name} " +
-                $"Block: {Block}\n";                
+            return $"SHIELD: {Name} | " +
+                $"Block: {Block}";                
         }
 
         public static Shield GetShield(int index)
         {
             Shield none = new Shield("None Equipped", 0);
             Shield buckler = new Shield("Buckler", 4);
-            Shield kite = new Shield("Kite Shield", 7);
-            Shield heater = new Shield("Heater Shield", 10);
+            Shield kite = new Shield("Kite Shield", 8);
+            Shield heater = new Shield("Heater Shield", 12);
             List<Shield> shields = new List<Shield>()
                     {none, buckler, kite, heater};
 
