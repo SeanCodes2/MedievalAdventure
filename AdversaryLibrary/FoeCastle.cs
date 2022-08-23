@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class FoeCastle : Adversary
+    public sealed class FoeCastle : Adversary
     {
         public int DamageBonus { get; set; }
 
@@ -23,15 +23,14 @@ namespace AdventureLibrary
 
         public static FoeCastle GetCastleFoe()
         {
-            FoeCastle guard = new FoeCastle("Castle Guard", 20, 20, 3, 1, 5, 3, 1);
-            FoeCastle captain = new FoeCastle("Castle Captain", 25, 25, 4, 2, 6, 4, 2); ;
-            FoeCastle knight = new FoeCastle("Castle Knight", 30, 30, 5, 4, 7, 5, 3);
-            FoeCastle king = new FoeCastle("King Arthur", 35, 35, 6, 2, 8, 6, 4);
+            FoeCastle guard = new FoeCastle("Castle Guard", 40, 40, 9, 3, 5, 40, 8);
+            FoeCastle captain = new FoeCastle("Castle Captain", 45, 45, 9, 3, 6, 40, 8); ;
+            FoeCastle knight = new FoeCastle("Castle Knight", 54, 54, 10, 3, 7, 40, 9);
+            FoeCastle king = new FoeCastle("King Arthur", 59, 59, 10, 3, 8, 40, 9);
             List<FoeCastle> castleFoes = new List<FoeCastle>()
                 { guard, captain, knight, king };
 
             return castleFoes[new Random().Next(castleFoes.Count)];
-
         }
         public override string ToString()
         {

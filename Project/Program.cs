@@ -24,17 +24,17 @@ namespace Project
             //    "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
             //    "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
             //ConsoleKey classChoice = Console.ReadKey(true).Key;       
-            
+
             //switch (classChoice)
             //{
             //    case ConsoleKey.D1:
             //        CharacterClass playerClass = (CharacterClass)classChoice;
-                    
+
             //        break;
             //    default:
             //        break;
             //}
-//foreach (var type in charClass)
+            //foreach (var type in charClass)
             //{
             //    Console.WriteLine($"{Index}) {type}");
             //    Index++;
@@ -47,7 +47,7 @@ namespace Project
             //Customize race/name based on user input
             var charClass = Enum.GetValues(typeof(CharacterClass));
             int Index = 1;
-            
+
             Console.Write("\nPlease select a class:\n\n" +
                 "1. Balanced\t\tNo Change\n" +
                 "2. Dexer\t\tHitchance +10 | MaxLife -5\n" +
@@ -55,7 +55,7 @@ namespace Project
                 "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
                 "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
 
-            
+
 
             int userInput = int.Parse(Console.ReadLine()) - 1;//Subtract 1 to make zero based
             CharacterClass playerClass = (CharacterClass)userInput;
@@ -64,23 +64,20 @@ namespace Project
             Weapon userWeapon = Weapon.GetWeapon(0);
             Shield userShield = Shield.GetShield(0);
 
-            Player user = new Player(name,playerClass, 50, 50, 60, 0, userWeapon, userShield, 50, 0, 5);
+            Player user = new Player(name, playerClass, 50, 50, 60, 0, userWeapon, userShield, 50, 0, 0);
 
             Console.Clear();
             Console.WriteLine($"\nWelcome {user.Name}! Your Adventure Awaits!");
 
-
             Random rand1 = new Random();
             bool adventureLoop = true;
-            Location currentRoom = Room.GetRoom(1);
+            Location currentRoom = Location.GetRoom(1);
             do
             {
 
-                
-
                 bool encounterLoop = true;
                 do
-                {                    
+                {
                     ConsoleKey menuChoice;
                     #region Adversary Switch
                     Adversary adversary = new Adversary();
@@ -128,15 +125,14 @@ namespace Project
                     bool newMonster = false;
                     while (!newMonster)
                     {
-                    Console.WriteLine($"\n\n\t\t\t\t\tNORTH: {currentRoom.North.Name} \n\n\n" +
-                        $"\t\tWEST: {currentRoom.West.Name}" +
-                        $"\n\t\t\t\t\t\t\t\t\tEAST: {currentRoom.East.Name}\n\n\n" +
-                        $"\t\t\t\t\tSOUTH: {currentRoom.South.Name}\n\n\n");
+                        Console.WriteLine($"\n\n\t\t\t\t\tNORTH: {currentRoom.North.Name} \n\n\n" +
+                            $"\t\tWEST: {currentRoom.West.Name}" +
+                            $"\n\t\t\t\t\t\t\t\t\tEAST: {currentRoom.East.Name}\n\n\n" +
+                            $"\t\t\t\t\tSOUTH: {currentRoom.South.Name}\n\n\n");
 
-                    Console.WriteLine($"\nWelcome to the {currentRoom} - {currentRoom.Description}\n");
+                        Console.WriteLine($"\nWelcome to the {currentRoom} - {currentRoom.Description}\n");
 
-
-                    Console.WriteLine($"Current Adversary: {adversary.Name}\n");
+                        Console.WriteLine($"Current Adversary: {adversary.Name}\n");
 
                         #region Inn Menu
                         if (currentRoom.Id == 1)
@@ -261,7 +257,6 @@ namespace Project
                                         $"8. (15 Gold) Bandage (restores 15 lift)" +
                                         $"\n" +
                                         $"E. Exit Store");
-
                                     ConsoleKey shopChoice = Console.ReadKey(true).Key;
                                     switch (shopChoice)
                                     {
@@ -410,7 +405,8 @@ namespace Project
                                     Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
                                     Console.Clear();
                                     adventureLoop = false;
-
+                                    encounterLoop = false;
+                                    newMonster = true;
                                     break;
                                 default:
                                     Console.WriteLine("Unknown Command - Please try again.");
@@ -421,7 +417,9 @@ namespace Project
 
                         #region Attack Menu
                         else
-                        {                            
+                        {
+                            Random rand = new Random();
+                            int diceRoll = rand.Next(1, 101);
                             Console.Write("Choose Your Next Move:\n" +
                                "\tUpArrow - Move North\n" +
                                "\tRightArrow - Move East\n" +
@@ -439,30 +437,62 @@ namespace Project
                             switch (choice)
                             {
                                 case ConsoleKey.UpArrow:
-                                    currentRoom = currentRoom.North;
-                                    newMonster = true;
-                                    Console.WriteLine("You Move North\n" + "Press any Key to Continue");
+                                    if (currentRoom.North.Id == 19 || currentRoom.North.Id == 18)
+                                    {
+                                        Console.WriteLine("You Cant Travel There!!");
+                                    }
+                                    else
+                                    {
+                                        currentRoom = currentRoom.North;
+                                        newMonster = true;
+                                        Combat.TryEscape(adversary, user);
+                                        Console.WriteLine("You Move North\n" + "Press any Key to Continue");
+                                    }
                                     Console.ReadKey();
                                     Console.Clear();
                                     break;
                                 case ConsoleKey.RightArrow:
-                                    currentRoom = currentRoom.East;
-                                    newMonster = true;
-                                    Console.WriteLine("You Move East\n" + "Press any Key to Continue");
+                                    if (currentRoom.East.Id == 19 || currentRoom.East.Id == 18)
+                                    {
+                                        Console.WriteLine("You Cant Travel There!!");
+                                    }
+                                    else
+                                    {
+                                        currentRoom = currentRoom.East;
+                                        newMonster = true;
+                                        Combat.TryEscape(adversary, user);
+                                        Console.WriteLine("You Move East\n" + "Press any Key to Continue");
+                                    }
                                     Console.ReadKey();
                                     Console.Clear();
                                     break;
                                 case ConsoleKey.DownArrow:
-                                    currentRoom = currentRoom.South;
-                                    newMonster = true;
-                                    Console.WriteLine("You Move South\n" + "Press any Key to Continue");
+                                    if (currentRoom.South.Id == 19 || currentRoom.South.Id == 18)
+                                    {
+                                        Console.WriteLine("You Cant Travel There!!");
+                                    }
+                                    else
+                                    {
+                                        currentRoom = currentRoom.South;
+                                        newMonster = true;
+                                        Combat.TryEscape(adversary, user);
+                                        Console.WriteLine("You Move South\n" + "Press any Key to Continue");
+                                    }
                                     Console.ReadKey();
                                     Console.Clear();
                                     break;
                                 case ConsoleKey.LeftArrow:
-                                    currentRoom = currentRoom.West;
-                                    newMonster = true;
-                                    Console.WriteLine("You Move West\n" + "Press any Key to Continue");
+                                    if (currentRoom.West.Id == 19 || currentRoom.West.Id == 18)
+                                    {
+                                        Console.WriteLine("You Cant Travel There!!");
+                                    }
+                                    else
+                                    {
+                                        currentRoom = currentRoom.West;
+                                        newMonster = true;
+                                        Combat.TryEscape(adversary, user);
+                                        Console.WriteLine("You Move West\n" + "Press any Key to Continue");
+                                    }
                                     Console.ReadKey();
                                     Console.Clear();
                                     break;
@@ -473,9 +503,6 @@ namespace Project
                                     Combat.DoBattle(user, adversary);
                                     if (adversary.Life <= 0)
                                     {
-                                        //Its' dead
-                                        //logic for items/gold
-                                       
                                         Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"\nYou killed {adversary.Name}!");
                                         Console.Beep(700, 500);
@@ -489,12 +516,27 @@ namespace Project
                                     {
                                         Console.WriteLine("Dude.... you Died!\a");
                                         adventureLoop = false;
+                                        encounterLoop = false;
                                     }
                                     Console.ReadKey(true);
                                     Console.Clear();
                                     break;
                                 case ConsoleKey.R:
-                                    newMonster = true;
+
+                                    if (diceRoll < user.EscapeChance)
+                                    {
+                                        //Console.WriteLine("You Try to Run Away...");
+                                        Combat.DoAttack(adversary, user);
+                                        Console.WriteLine($"{adversary.Name} attacks you as you flee...");
+                                        Console.ReadKey();
+                                        newMonster = true;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("You Run Away....");
+                                        Console.ReadKey();
+                                        newMonster = true;
+                                    }
                                     break;
                                 case ConsoleKey.P:
                                     Console.Clear();
@@ -521,15 +563,9 @@ namespace Project
                         }
                         #endregion
                     }
-
-
                 } while (encounterLoop && adventureLoop);
             } while (adventureLoop);
 
-        }//End Main()
-
-
-
-
+        }//End Main()    
     }//End Class
 }//End Namespace

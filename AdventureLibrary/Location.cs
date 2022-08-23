@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class Location
+    public partial class Location
     {
         //Field | _camelCase | Access Modifier Private
         private string _name;
@@ -72,8 +72,14 @@ namespace AdventureLibrary
             get { return _hasLoot; }
             set { _hasLoot = value; }
         }
+        public Location Current { get; set; }
 
         //Constructors | camelCase of props | Public Access | Recreate default CTOR
+
+        public Location()
+        {
+
+        }
 
         public Location(string name, int id, string description, bool hasStore, int dangerLvl, bool hasLoot)
         {
@@ -85,7 +91,7 @@ namespace AdventureLibrary
             HasLoot = hasLoot;
         }
 
-        public Location() { }
+        
 
         //Methods | Actions related to or using props of our object
 
@@ -94,6 +100,7 @@ namespace AdventureLibrary
             //return base.ToString();
             return $"{Name}";
         }
+
 
 
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class FoeMtnPass : Adversary
+    public sealed class FoeMtnPass : Adversary
     {
         public bool IsBeastMode { get; set; }
 
@@ -47,10 +47,10 @@ namespace AdventureLibrary
 
         public static FoeMtnPass GetMtnPassFoe()
         {
-            FoeMtnPass orc = new FoeMtnPass("Orc", 20, 20, 3, 1, 5, 3, false);
-            FoeMtnPass orcBrute = new FoeMtnPass("Orc Brute", 25, 25, 4, 2, 6, 4, false);
-            FoeMtnPass orcCaptain = new FoeMtnPass("Orc Captain", 30, 30, 5, 4, 7, 5, false);
-            FoeMtnPass OrcLord = new FoeMtnPass("Orc Lord", 35, 35, 6, 2, 8, 6, false);
+            FoeMtnPass orc = new FoeMtnPass("Orc", 54, 54, 10, 3, 40, 9, false);
+            FoeMtnPass orcBrute = new FoeMtnPass("Orc Brute", 59, 59, 11, 3, 40, 9, false);
+            FoeMtnPass orcCaptain = new FoeMtnPass("Orc Captain", 65, 65, 12, 4, 40, 10, false);
+            FoeMtnPass OrcLord = new FoeMtnPass("Orc Lord", 70, 70, 13, 5, 40, 10, false);
             List<FoeMtnPass> mtnPassFoes = new List<FoeMtnPass>()
                 {orc, orcBrute, orcCaptain, OrcLord};
 

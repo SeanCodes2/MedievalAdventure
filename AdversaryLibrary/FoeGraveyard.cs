@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdversaryLibrary
 {
-    public class FoeGraveyard : Adversary
+    public sealed class FoeGraveyard : Adversary
     {
         public bool IsNight { get; set; }
 
@@ -23,10 +23,10 @@ namespace AdversaryLibrary
 
         public static FoeGraveyard GetGraveyardFoe()
         {
-            FoeGraveyard skeleton = new FoeGraveyard("Skeleton", 20, 20, 3, 1, 5, 3, false);
-            FoeGraveyard mummy = new FoeGraveyard("Mummy", 25, 25, 4, 2, 6, 4, false); ;
-            FoeGraveyard ghoul = new FoeGraveyard("Ghoul", 30, 30, 5, 4, 7, 5, false);
-            FoeGraveyard shade = new FoeGraveyard("Shade", 35, 35, 6, 2, 8, 6, false);
+            FoeGraveyard skeleton = new FoeGraveyard("Skeleton", 30, 30, 7, 3, 40, 7, false);
+            FoeGraveyard mummy = new FoeGraveyard("Mummy", 36, 36, 7,3, 40, 7, false); ;
+            FoeGraveyard ghoul = new FoeGraveyard("Ghoul", 40, 40, 8, 3, 40, 8, false);
+            FoeGraveyard shade = new FoeGraveyard("Shade", 45, 45, 9, 3, 40, 8, false);
             List<FoeGraveyard> graveyardFoes = new List<FoeGraveyard>()
                 {skeleton,mummy,ghoul,shade};
 
