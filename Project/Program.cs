@@ -16,33 +16,6 @@ namespace Project
             #endregion
 
             #region Player Choosing Class 
-            //var charClass = Enum.GetValues(typeof(CharacterClass));
-            //Console.Write("\nPlease select a class:" +
-            //    "1. Balanced\t\tNo Change\n" +
-            //    "2. Dexer\t\tHitchance +10 | MaxLife -5\n" +
-            //    "3. Tank\t\t+Block +5 | MaxLife +10 | HitChance -5 | EscapeChance -10\n" +
-            //    "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
-            //    "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
-            //ConsoleKey classChoice = Console.ReadKey(true).Key;       
-
-            //switch (classChoice)
-            //{
-            //    case ConsoleKey.D1:
-            //        CharacterClass playerClass = (CharacterClass)classChoice;
-
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //foreach (var type in charClass)
-            //{
-            //    Console.WriteLine($"{Index}) {type}");
-            //    Index++;
-            //}
-
-
-
-
 
             //Customize race/name based on user input
             var charClass = Enum.GetValues(typeof(CharacterClass));
@@ -55,23 +28,21 @@ namespace Project
                 "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
                 "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
 
-
-
             int userInput = int.Parse(Console.ReadLine()) - 1;//Subtract 1 to make zero based
+          
             CharacterClass playerClass = (CharacterClass)userInput;
             #endregion
 
             Weapon userWeapon = Weapon.GetWeapon(0);
             Shield userShield = Shield.GetShield(0);
-
+            Location currentRoom = Location.GetRoom(1);
             Player user = new Player(name, playerClass, 50, 50, 60, 0, userWeapon, userShield, 50, 0, 0);
 
             Console.Clear();
-            Console.WriteLine($"\nWelcome {user.Name}! Your Adventure Awaits!");
 
-            Random rand1 = new Random();
+            Console.WriteLine($"\nWelcome {user.Name}! Your Adventure Awaits!");
+                        
             bool adventureLoop = true;
-            Location currentRoom = Location.GetRoom(1);
             do
             {
 
@@ -137,63 +108,7 @@ namespace Project
                         #region Inn Menu
                         if (currentRoom.Id == 1)
                         {
-                            Console.Write("\nMake Your Next Move:\n\n" +
-                                "\tUpArrow - Move North\n" +
-                                "\tRightArrow - Move East\n" +
-                                "\tDownArrow - Move South\n" +
-                                "\tLeftArrow - Move West\n" +
-                                "\tP. - Player Info\n" +
-                                "\tE. - Exit\n\n");
-
-                            menuChoice = Console.ReadKey(true).Key;
-
-                            switch (menuChoice)
-                            {
-                                case ConsoleKey.UpArrow:
-                                    Console.WriteLine("You Move North\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.North;
-                                    newMonster = true;
-                                    break;
-                                case ConsoleKey.RightArrow:
-                                    Console.WriteLine("You Move East\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.East;
-                                    newMonster = true;
-                                    break;
-                                case ConsoleKey.DownArrow:
-                                    Console.WriteLine("You Move South\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.South;
-                                    newMonster = true;
-                                    break;
-                                case ConsoleKey.LeftArrow:
-                                    Console.WriteLine("You Move West\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.West;
-                                    newMonster = true;
-                                    break;
-                                case ConsoleKey.P:
-                                    Console.Clear();
-                                    Console.WriteLine(user);
-                                    Console.WriteLine(user.EquippedWeapon);
-                                    Console.WriteLine(user.EquippedShield);
-                                    Console.ReadKey();
-                                    break;
-                                case ConsoleKey.E:
-                                case ConsoleKey.Escape:
-                                    Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
-                                    Console.Clear();
-                                    adventureLoop = false;
-                                    break;
-                                default:
-                                    Console.WriteLine("Unknown Command - Please try again.");
-                                    break;
-                            }//end switch
+                            menuChoice = Location.InnMenu(ref currentRoom, user, ref adventureLoop, ref encounterLoop, ref newMonster);
 
                         }//end room 1 IF
                         #endregion
@@ -247,8 +162,8 @@ namespace Project
                                     Console.Clear();
                                     Console.WriteLine($"\n\nGold Available: {user.Gold}\n");
                                     Console.WriteLine($"Current wares available:\n\n" +
-                                        $"1. (10 Gold) Dagger {Weapon.GetWeapon(2)}\n" +
-                                        $"2. (15 Gold) Katana {Weapon.GetWeapon(1)}\n" +
+                                        $"1. (10 Gold) Dagger {Weapon.GetWeapon(1)}\n" +
+                                        $"2. (15 Gold) Katana {Weapon.GetWeapon(2)}\n" +
                                         $"3. (20 Gold) Spear {Weapon.GetWeapon(3)}\n" +
                                         $"4. (25 Gold) Mace {Weapon.GetWeapon(4)}\n" +
                                         $"5. (10 Gold) Buckler Shield{Shield.GetShield(1)}\n" +
@@ -258,6 +173,7 @@ namespace Project
                                         $"\n" +
                                         $"E. Exit Store");
                                     ConsoleKey shopChoice = Console.ReadKey(true).Key;
+                                    
                                     switch (shopChoice)
                                     {
                                         case ConsoleKey.D1:
@@ -552,9 +468,12 @@ namespace Project
                                     break;
                                 case ConsoleKey.E:
                                 case ConsoleKey.Escape:
+                                    adventureLoop = false;
+                                    encounterLoop=false;
+                                    newMonster = true;
+                                    
                                     Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
                                     Console.Clear();
-                                    adventureLoop = false;
                                     break;
                                 default:
                                     Console.WriteLine("Unknown Command - Please try again.");
@@ -566,6 +485,72 @@ namespace Project
                 } while (encounterLoop && adventureLoop);
             } while (adventureLoop);
 
+            static ConsoleKey NewMethod(ref Location currentRoom, Player user, ref bool adventureLoop, ref bool encounterLoop, ref bool newMonster)
+            {
+                ConsoleKey menuChoice;
+                Console.Write("\nMake Your Next Move:\n\n" +
+                                                "\tUpArrow - Move North\n" +
+                                                "\tRightArrow - Move East\n" +
+                                                "\tDownArrow - Move South\n" +
+                                                "\tLeftArrow - Move West\n" +
+                                                "\tP. - Player Info\n" +
+                                                "\tE. - Exit\n\n");
+
+                menuChoice = Console.ReadKey(true).Key;
+
+                switch (menuChoice)
+                {
+                    case ConsoleKey.UpArrow:
+                        Console.WriteLine("You Move North\n" + "Press any Key to Continue");
+                        Console.ReadKey();
+                        Console.Clear();
+                        currentRoom = currentRoom.North;
+                        newMonster = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        Console.WriteLine("You Move East\n" + "Press any Key to Continue");
+                        Console.ReadKey();
+                        Console.Clear();
+                        currentRoom = currentRoom.East;
+                        newMonster = true;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        Console.WriteLine("You Move South\n" + "Press any Key to Continue");
+                        Console.ReadKey();
+                        Console.Clear();
+                        currentRoom = currentRoom.South;
+                        newMonster = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        Console.WriteLine("You Move West\n" + "Press any Key to Continue");
+                        Console.ReadKey();
+                        Console.Clear();
+                        currentRoom = currentRoom.West;
+                        newMonster = true;
+                        break;
+                    case ConsoleKey.P:
+                        Console.Clear();
+                        Console.WriteLine(user);
+                        Console.WriteLine(user.EquippedWeapon);
+                        Console.WriteLine(user.EquippedShield);
+                        Console.ReadKey();
+                        break;
+                    case ConsoleKey.E:
+                    case ConsoleKey.Escape:
+                        Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
+                        Console.ReadKey(true);
+                        Console.Clear();
+                        adventureLoop = false;
+                        encounterLoop = false;
+                        newMonster = true;
+                        break;
+                    default:
+                        Console.WriteLine("Unknown Command - Please try again.");
+                        break;
+                }//end switch
+
+                return menuChoice;
+            }
         }//End Main()    
     }//End Class
 }//End Namespace
