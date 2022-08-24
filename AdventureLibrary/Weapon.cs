@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace AdventureLibrary
 {
     public class Weapon : Items
-    {       
+    {
         private int _minDamage;
-     
+
         public int MinDamage
         {
             get { return _minDamage; }
@@ -26,33 +26,33 @@ namespace AdventureLibrary
             }
         }
 
-        public int MaxDamage { get; set; }       
+        public int MaxDamage { get; set; }
 
         public int BonusHitChance { get; set; }
-             
+
         public Weapon() { }
 
-        public Weapon( string name, int block, int cost, int minDamage, int maxDamage, int bonusHitChance ) : base(block, cost, name)
+        public Weapon(string name, int maxDamage, int minDamage, int bonusHitChance, int block, int cost) : base(block, cost, name)
         {
             MinDamage = minDamage;
             MaxDamage = maxDamage;
             BonusHitChance = bonusHitChance;
         }
-       
+
         public override string ToString()
         {
             //return base.ToString();
             return $"WEAPON: {Name} | " +
                 $"HitChance: {BonusHitChance} | " +
-                $"Damage: {MinDamage}-{MaxDamage} ";
+                $"Damage: {MinDamage}-{MaxDamage}\n";
         }
         public static Weapon GetWeapon(int index)
         {
-            Weapon butterKnife = new Weapon("Butter Knife", 7, 2, 8, 1, 0);
-            Weapon katana = new Weapon("Katana", 12, 4, 9, 2, 15);
-            Weapon dagger = new Weapon("Dagger", 8, 4, 10, 1, 10);
-            Weapon spear = new Weapon("Short Spear", 15, 4, 10, 3, 20);
-            Weapon mace = new Weapon("Mace", 18, 5, 10, 2, 25);
+            Weapon butterKnife = new Weapon("Butter Knife", 7, 2, 8, 0, 0);
+            Weapon katana = new Weapon("Katana", 12, 4, 9, 0, 15);
+            Weapon dagger = new Weapon("Dagger", 8, 4, 10, 0, 10);
+            Weapon spear = new Weapon("Short Spear", 15, 4, 10, 0, 20);
+            Weapon mace = new Weapon("Mace", 18, 5, 10, 0, 25);
 
             List<Weapon> weapons = new List<Weapon>()
                     { butterKnife, dagger, katana,  spear, mace };
