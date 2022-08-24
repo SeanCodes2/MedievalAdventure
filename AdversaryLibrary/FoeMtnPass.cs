@@ -16,41 +16,29 @@ namespace AdventureLibrary
             IsBeastMode = isBeastMode;
         }
 
-        public override int CalcBlock()
-        {
-            int block = 4;
-            if (IsBeastMode)
-            {
-                block += 4;
-            }
-            return block;
-        }
-        public override int CalcDamage()
-        {
-            int damage = 4;
-            if (IsBeastMode)
-            {
-                damage += 4;
-            }
-            return damage;
-        }
+        //public override int CalcBlock()
+        //{
+        //    return base.CalcBlock();
+        //}
+        //public override int CalcDamage()
+        //{
 
-        public override int CalcHitChance()
-        {
-            int hitChance = 4;
-            if (IsBeastMode)
-            {
-                hitChance += 4;
-            }
-            return hitChance;
-        }
+
+        //    return base.CalcDamage();
+        //}
+
+        //public override int CalcHitChance()
+        //{
+
+        //    return base.CalcHitChance();
+        //}
 
         public static FoeMtnPass GetMtnPassFoe()
         {
-            FoeMtnPass orc = new FoeMtnPass("Orc", 54, 54, 10, 3, 40, 9, false);
-            FoeMtnPass orcBrute = new FoeMtnPass("Orc Brute", 59, 59, 11, 3, 40, 9, false);
-            FoeMtnPass orcCaptain = new FoeMtnPass("Orc Captain", 65, 65, 12, 4, 40, 10, false);
-            FoeMtnPass OrcLord = new FoeMtnPass("Orc Lord", 70, 70, 13, 5, 40, 10, false);
+            FoeMtnPass orc = new FoeMtnPass("Orc", 54, 54, 12, 3, 65, 10, false);
+            FoeMtnPass orcBrute = new FoeMtnPass("Orc Brute", 59, 59, 14, 5, 65, 13, false);
+            FoeMtnPass orcCaptain = new FoeMtnPass("Orc Captain", 65, 65, 18, 6, 70, 20, false);
+            FoeMtnPass OrcLord = new FoeMtnPass("Orc Lord", 70, 70, 20, 8, 70, 25, false);
             List<FoeMtnPass> mtnPassFoes = new List<FoeMtnPass>()
                 {orc, orcBrute, orcCaptain, OrcLord};
 

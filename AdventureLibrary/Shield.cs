@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace AdventureLibrary
 {
-    public class Shield
+    public class Shield : Items
     {
-        public string Name { get; set; }
-        public int Block { get; set; }
-
         public Shield() { }
-        public Shield(string name, int block)
-        {
-            Name = name;
-            Block = block;
-        }
+
+        public Shield(string name, int block, int cost ) : base(block, cost, name)
+        {}
 
         public override string ToString()
         {
@@ -26,10 +21,10 @@ namespace AdventureLibrary
 
         public static Shield GetShield(int index)
         {
-            Shield none = new Shield("None Equipped", 0);
-            Shield buckler = new Shield("Buckler", 4);
-            Shield kite = new Shield("Kite Shield", 8);
-            Shield heater = new Shield("Heater Shield", 12);
+            Shield none = new Shield("None Equipped", 0,0);
+            Shield buckler = new Shield("Buckler", 4,10);
+            Shield kite = new Shield("Kite Shield", 8,25);
+            Shield heater = new Shield("Heater Shield", 10,40);
             List<Shield> shields = new List<Shield>()
                     {none, buckler, kite, heater};
 
