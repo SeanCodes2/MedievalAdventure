@@ -29,19 +29,19 @@ namespace Project
                 "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
 
             int userInput = int.Parse(Console.ReadLine()) - 1;//Subtract 1 to make zero based
-          
+
             CharacterClass playerClass = (CharacterClass)userInput;
             #endregion
 
             Weapon userWeapon = Weapon.GetWeapon(0);
             Shield userShield = Shield.GetShield(0);
-            Location currentRoom = Location.GetRoom(1);
-            Player user = new Player(name, playerClass, 50, 50, 60, 0, userWeapon, userShield, 50, 0, 0);
+            Location currentRoom = Location.GetRoomById(0);
+            Player user = new Player(name, playerClass, 50, 50, 60, 0, userWeapon, userShield, 50, 0, 40);
 
             Console.Clear();
 
-            Console.WriteLine($"\nWelcome {user.Name}! Your Adventure Awaits!");
-                        
+            Console.WriteLine($"\nWelcome {user.Name}! Your Adventure Awaits!\n\n");
+
             bool adventureLoop = true;
             do
             {
@@ -50,43 +50,55 @@ namespace Project
                 do
                 {
                     ConsoleKey menuChoice;
+
                     #region Adversary Switch
                     Adversary adversary = new Adversary();
-                    switch (currentRoom.Id)
+                    switch (currentRoom.ID)
                     {
-                        case 1:
-                        case 2:
+                        case 0:
                             adversary = new Adversary();
                             break;
-                        case 3:
+                        case 1:
+                            adversary = FoeForestRoad.GetForestRoadFoe();
+                            break;
+                        case 2:
                             adversary = FoeSewer.GetSewerFoe();
                             break;
-                        case 4:
-                            adversary = FoeGraveyard.GetGraveyardFoe();
+                        case 3:
+                            adversary = new Adversary();
                             break;
+                        case 4:
                         case 5:
-                            adversary = FoeCastle.GetCastleFoe();
+                            adversary = FoeForestRoad.GetForestRoadFoe();
                             break;
                         case 6:
-                            adversary = FoeMtnPass.GetMtnPassFoe();
+                            adversary = FoeCastle.GetCastleFoe();
                             break;
                         case 7:
+                            adversary = FoeSwamp.GetSwampFoe();
+                            break;
                         case 8:
                         case 9:
                             adversary = FoeForestRoad.GetForestRoadFoe();
                             break;
                         case 10:
-                        case 11:
                             adversary = FoeSwamp.GetSwampFoe();
                             break;
+                        case 11:
                         case 12:
-                        case 13:
-                        case 14:
-                        case 15:
-                        case 16:
-                        case 17:
                             adversary = FoeForestRoad.GetForestRoadFoe();
                             break;
+                        case 13:
+                            adversary = FoeGraveyard.GetGraveyardFoe();
+                            break;
+                        case 14:
+                            adversary = FoeMtnPass.GetMtnPassFoe();
+                            break;
+                        case 15:
+                            adversary = FoeForestRoad.GetForestRoadFoe();
+                            break;
+                        //case 16:
+                        //case 17:
                         default:
                             adversary = new Adversary();
                             break;
@@ -96,17 +108,15 @@ namespace Project
                     bool newMonster = false;
                     while (!newMonster)
                     {
-                        Console.WriteLine($"\n\n\t\t\t\t\tNORTH: {currentRoom.North.Name} \n\n\n" +
-                            $"\t\tWEST: {currentRoom.West.Name}" +
-                            $"\n\t\t\t\t\t\t\t\t\tEAST: {currentRoom.East.Name}\n\n\n" +
-                            $"\t\t\t\t\tSOUTH: {currentRoom.South.Name}\n\n\n");
+                        
+                        Console.WriteLine(currentRoom.RoomMap());
 
                         Console.WriteLine($"\nWelcome to the {currentRoom} - {currentRoom.Description}\n");
 
                         Console.WriteLine($"Current Adversary: {adversary.Name}\n");
 
                         #region Inn Menu
-                        if (currentRoom.Id == 1)
+                        if (currentRoom.ID == 0)
                         {
                             menuChoice = Location.InnMenu(ref currentRoom, user, ref adventureLoop, ref encounterLoop, ref newMonster);
 
@@ -114,7 +124,7 @@ namespace Project
                         #endregion
 
                         #region Provisioner Menu
-                        else if (currentRoom.Id == 2)
+                        else if (currentRoom.ID == 3)
                         {
 
                             Console.Write("\nMake Your Next Move:\n\n" +
@@ -131,31 +141,19 @@ namespace Project
                             switch (menuChoice)
                             {
                                 case ConsoleKey.UpArrow:
-                                    Console.WriteLine("You Move North\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.North;
+                                    Location.MoveNorth(ref currentRoom);
                                     newMonster = true;
                                     break;
                                 case ConsoleKey.RightArrow:
-                                    Console.WriteLine("You Move East\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.East;
+                                    Location.MoveEast(ref currentRoom);
                                     newMonster = true;
                                     break;
                                 case ConsoleKey.DownArrow:
-                                    Console.WriteLine("You Move South\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.South;
+                                    Location.MoveSouth(ref currentRoom);
                                     newMonster = true;
                                     break;
                                 case ConsoleKey.LeftArrow:
-                                    Console.WriteLine("You Move West\n" + "Press any Key to Continue");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    currentRoom = currentRoom.West;
+                                    Location.MoveWest(ref currentRoom);
                                     newMonster = true;
                                     break;
                                 case ConsoleKey.S:
@@ -173,142 +171,7 @@ namespace Project
                                         $"\n" +
                                         $"E. Exit Store");
                                     ConsoleKey shopChoice = Console.ReadKey(true).Key;
-                                    
-                                    switch (shopChoice)
-                                    {
-                                        case ConsoleKey.D1:
-                                            if (user.Gold < 10)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought The Dagger!");
-                                                user.Gold = user.Gold - 10;
-                                                user.EquippedWeapon = Weapon.GetWeapon(2);
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        case ConsoleKey.D2:
-                                            if (user.Gold < 15)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought The Katana!");
-                                                user.Gold = user.Gold - 15;
-                                                user.EquippedWeapon = Weapon.GetWeapon(1);
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        case ConsoleKey.D3:
-                                            if (user.Gold < 20)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought The Spear!");
-                                                user.Gold = user.Gold - 20;
-                                                user.EquippedWeapon = Weapon.GetWeapon(3);
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        case ConsoleKey.D4:
-                                            if (user.Gold < 25)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought The Mace!");
-                                                user.Gold = user.Gold - 25;
-                                                user.EquippedWeapon = Weapon.GetWeapon(4);
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        case ConsoleKey.D5:
-                                            if (user.Gold < 10)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought The Buckler!");
-                                                user.Gold = user.Gold - 10;
-                                                user.EquippedShield = Shield.GetShield(1);
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        case ConsoleKey.D6:
-                                            if (user.Gold < 25)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought The Kite Shield!");
-                                                user.Gold = user.Gold - 25;
-                                                user.EquippedShield = Shield.GetShield(2);
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        case ConsoleKey.D7:
-                                            if (user.Gold < 40)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought The Heater Shield!");
-                                                user.Gold = user.Gold - 40;
-                                                user.EquippedShield = Shield.GetShield(3);
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        case ConsoleKey.D8:
-                                            if (user.Gold < 15)
-                                            {
-                                                Console.WriteLine("Cannot Afford That Item.");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine($"You Bought a Bandage!");
-                                                user.Gold = user.Gold - 15;
-                                                user.Life = user.Life + 15;
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        default:
-                                            Console.WriteLine("Unknown Command - Please try again. ");
-                                            Console.ReadKey();
-                                            break;
-                                    }
+                                    Items.ShopChoice(user, shopChoice);
                                     break;
                                 case ConsoleKey.P:
                                     Console.Clear();
@@ -353,64 +216,20 @@ namespace Project
                             switch (choice)
                             {
                                 case ConsoleKey.UpArrow:
-                                    if (currentRoom.North.Id == 19 || currentRoom.North.Id == 18)
-                                    {
-                                        Console.WriteLine("You Cant Travel There!!");
-                                    }
-                                    else
-                                    {
-                                        currentRoom = currentRoom.North;
-                                        newMonster = true;
-                                        Combat.TryEscape(adversary, user);
-                                        Console.WriteLine("You Move North\n" + "Press any Key to Continue");
-                                    }
-                                    Console.ReadKey();
-                                    Console.Clear();
+                                    Location.MoveNorth(ref currentRoom);
+                                    newMonster = true;
                                     break;
                                 case ConsoleKey.RightArrow:
-                                    if (currentRoom.East.Id == 19 || currentRoom.East.Id == 18)
-                                    {
-                                        Console.WriteLine("You Cant Travel There!!");
-                                    }
-                                    else
-                                    {
-                                        currentRoom = currentRoom.East;
-                                        newMonster = true;
-                                        Combat.TryEscape(adversary, user);
-                                        Console.WriteLine("You Move East\n" + "Press any Key to Continue");
-                                    }
-                                    Console.ReadKey();
-                                    Console.Clear();
+                                    Location.MoveEast(ref currentRoom);
+                                    newMonster = true;
                                     break;
                                 case ConsoleKey.DownArrow:
-                                    if (currentRoom.South.Id == 19 || currentRoom.South.Id == 18)
-                                    {
-                                        Console.WriteLine("You Cant Travel There!!");
-                                    }
-                                    else
-                                    {
-                                        currentRoom = currentRoom.South;
-                                        newMonster = true;
-                                        Combat.TryEscape(adversary, user);
-                                        Console.WriteLine("You Move South\n" + "Press any Key to Continue");
-                                    }
-                                    Console.ReadKey();
-                                    Console.Clear();
+                                    Location.MoveSouth(ref currentRoom);
+                                    newMonster = true;
                                     break;
                                 case ConsoleKey.LeftArrow:
-                                    if (currentRoom.West.Id == 19 || currentRoom.West.Id == 18)
-                                    {
-                                        Console.WriteLine("You Cant Travel There!!");
-                                    }
-                                    else
-                                    {
-                                        currentRoom = currentRoom.West;
-                                        newMonster = true;
-                                        Combat.TryEscape(adversary, user);
-                                        Console.WriteLine("You Move West\n" + "Press any Key to Continue");
-                                    }
-                                    Console.ReadKey();
-                                    Console.Clear();
+                                    Location.MoveWest(ref currentRoom);
+                                    newMonster = true;
                                     break;
                                 case ConsoleKey.A:
                                     Console.Clear();
@@ -469,9 +288,9 @@ namespace Project
                                 case ConsoleKey.E:
                                 case ConsoleKey.Escape:
                                     adventureLoop = false;
-                                    encounterLoop=false;
+                                    encounterLoop = false;
                                     newMonster = true;
-                                    
+
                                     Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
                                     Console.Clear();
                                     break;
@@ -485,72 +304,8 @@ namespace Project
                 } while (encounterLoop && adventureLoop);
             } while (adventureLoop);
 
-            static ConsoleKey NewMethod(ref Location currentRoom, Player user, ref bool adventureLoop, ref bool encounterLoop, ref bool newMonster)
-            {
-                ConsoleKey menuChoice;
-                Console.Write("\nMake Your Next Move:\n\n" +
-                                                "\tUpArrow - Move North\n" +
-                                                "\tRightArrow - Move East\n" +
-                                                "\tDownArrow - Move South\n" +
-                                                "\tLeftArrow - Move West\n" +
-                                                "\tP. - Player Info\n" +
-                                                "\tE. - Exit\n\n");
-
-                menuChoice = Console.ReadKey(true).Key;
-
-                switch (menuChoice)
-                {
-                    case ConsoleKey.UpArrow:
-                        Console.WriteLine("You Move North\n" + "Press any Key to Continue");
-                        Console.ReadKey();
-                        Console.Clear();
-                        currentRoom = currentRoom.North;
-                        newMonster = true;
-                        break;
-                    case ConsoleKey.RightArrow:
-                        Console.WriteLine("You Move East\n" + "Press any Key to Continue");
-                        Console.ReadKey();
-                        Console.Clear();
-                        currentRoom = currentRoom.East;
-                        newMonster = true;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        Console.WriteLine("You Move South\n" + "Press any Key to Continue");
-                        Console.ReadKey();
-                        Console.Clear();
-                        currentRoom = currentRoom.South;
-                        newMonster = true;
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        Console.WriteLine("You Move West\n" + "Press any Key to Continue");
-                        Console.ReadKey();
-                        Console.Clear();
-                        currentRoom = currentRoom.West;
-                        newMonster = true;
-                        break;
-                    case ConsoleKey.P:
-                        Console.Clear();
-                        Console.WriteLine(user);
-                        Console.WriteLine(user.EquippedWeapon);
-                        Console.WriteLine(user.EquippedShield);
-                        Console.ReadKey();
-                        break;
-                    case ConsoleKey.E:
-                    case ConsoleKey.Escape:
-                        Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
-                        Console.ReadKey(true);
-                        Console.Clear();
-                        adventureLoop = false;
-                        encounterLoop = false;
-                        newMonster = true;
-                        break;
-                    default:
-                        Console.WriteLine("Unknown Command - Please try again.");
-                        break;
-                }//end switch
-
-                return menuChoice;
-            }
         }//End Main()    
+
+       
     }//End Class
 }//End Namespace
