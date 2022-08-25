@@ -55,54 +55,20 @@ namespace AdventureLibrary
             new Location("GraveYard", 13, 16, 8, 1, 12, "Risk your death to fight the undead. High risk high rewards here."),
             new Location("King's Castle", 6, 9, 17, 10, 4, "The mighty King's Castle in the forest"),
             new Location("Mountain Pass", 14, 16, 17, 9, 8, "You see a clearing in the mountains guarded by a goblin fort. You'll have to fight your way through to advance."),
-            new Location("Road1", 4, 5, 6, 7, 0, "A well traveled road from the Inn to the King's King's Castle."),
-            new Location("Road2", 1, 13, 5, 0, 15, "Dimmly lit from the over-arching tree line. Dare to venture out for new challenges?"),
-            new Location("Road3", 11, 3, 2, 17, 16, "A road riddled with graves from former travelers.. But that must be something on the other side worth the danger?"),
-            new Location("Swamp1", 7, 4, 10, 17, 2, "Water and Mud with the runoff from the sewer.. Gross but might be worth checking out."),
-            new Location("Swamp2", 10, 6, 17, 17, 7, "Plenty of opportunities for death and wealth in this swamp. "),
-            new Location("Forest1", 12, 16, 13, 15, 16, "Shadowy figures and the unknown in this densly wooded area."),
-            new Location("Forest2", 15, 12, 1, 3, 16, "Shadowy figures and the unknown in this densly wooded area."),
-            new Location("Forest3", 8, 16, 14, 5, 13, "Shadowy figures and the unknown in this densly wooded area."),
-            new Location("Forest4", 5, 8, 9, 4, 1, "Shadowy figures and the unknown in this densly wooded area."),
-            new Location("Forest5", 9, 14, 17, 6, 5, "Shadowy figures and the unknown in this densly wooded area."),
+            new Location("Road", 4, 5, 6, 7, 0, "A well traveled road from the Inn to the King's King's Castle."),
+            new Location("Road", 1, 13, 5, 0, 15, "Dimmly lit from the over-arching tree line. Dare to venture out for new challenges?"),
+            new Location("Road", 11, 3, 2, 17, 16, "A road riddled with the graves of former travelers.. But there must be something on the other side worth the danger?"),
+            new Location("Swamp", 7, 4, 10, 17, 2, "Water and Mud with the runoff from the sewer.. Gross but might be worth checking out."),
+            new Location("Swamp", 10, 6, 17, 17, 7, "Plenty of opportunities for death and wealth in this swamp. "),
+            new Location("Forest", 12, 16, 13, 15, 16, "Shadowy figures and the unknown in this densly wooded area."),
+            new Location("Forest", 15, 12, 1, 3, 16, "Shadowy figures and the unknown in this densly wooded area."),
+            new Location("Forest", 8, 16, 14, 5, 13, "Shadowy figures and the unknown in this densly wooded area."),
+            new Location("Forest", 5, 8, 9, 4, 1, "Shadowy figures and the unknown in this densly wooded area."),
+            new Location("Forest", 9, 14, 17, 6, 5, "Shadowy figures and the unknown in this densly wooded area."),
             new Location("Inaccessable Mountain", 16, 16, 16, 16, 16, "Vast formations of rock and snow. No getting through there.."),
-            new Location("Inaccessable Ocean", 17, 17, 17, 17, 17, "An Impassible body of water."),
-            //new Location("Forest", 99, 99, 99, 99, 99, "Shadowy figures and the unknown in this densly wooded area."),
+            new Location("Inaccessable Ocean", 17, 17, 17, 17, 17, "An Impassible body of water."),            
             };
         }
-
-
-
-        //inn.North = road2; inn.East = road1; inn.South = sewer; inn.West = provisioner;
-        //provisioner.North = forest2; provisioner.East = inn; provisioner.South = road3; provisioner.West = mountain;
-        //sewer.North = inn; sewer.East = swamp1; sewer.South = ocean; sewer.West = road3;
-        //graveyard.North = mountain; graveyard.East = forest3; graveyard.South = road2; graveyard.West = forest1;
-        //castle.North = forest6; castle.East = ocean; castle.South = swamp2; castle.West = road1;
-        //mtnPass.North = mountain; mtnPass.East = road3; mtnPass.South = mountain; mtnPass.West = mountain;
-        //road1.North = forest4; road1.East = castle; road1.South = swamp1; road1.West = inn;
-        //road2.North = graveyard; road2.East = forest4; road2.South = inn; road2.West = forest2;
-        //road3.North = provisioner; road3.East = sewer; road3.South = ocean; road3.West = mtnPass;
-        //swamp1.North = road1; swamp1.East = swamp2; swamp1.South = ocean; swamp1.West = sewer;
-        //swamp2.North = castle; swamp2.East = ocean; swamp2.South = ocean; swamp2.West = swamp1;
-        //forest1.North = mountain; forest1.East = graveyard; forest1.South = forest2; forest1.West = mountain;
-        //forest2.North = forest1; forest2.East = road2; forest2.South = provisioner; forest2.West = mountain;
-        //forest3.North = mountain; forest3.East = forest5; forest3.South = forest4; forest3.West = graveyard;
-        //forest4.North = forest3; forest4.East = forest5; forest4.South = road1; forest4.West = road2;
-        //forest5.North = mountain; forest5.East = ocean; forest5.South = forest6; forest5.West = forest3;
-        //forest6.North = forest5; forest6.East = ocean; forest6.South = castle; forest6.West = forest4;
-        //mountain.North = mountain; mountain.East = mountain; mountain.South = mountain; mountain.West = mountain; mountain.Current = mountain;
-        //ocean.North = ocean; ocean.East = ocean; ocean.South = ocean; ocean.West = ocean; ocean.Current = ocean;
-
-        //List<Location> rooms = new List<Location>()
-        //{
-        //    inn, provisioner, sewer, graveyard,castle,mtnPass,road1,road2,road3,swamp1,swamp2,forest1,forest2,forest3,forest4,forest5,forest6,mountain,ocean
-        //};
-
-        //Location currentLocation = rooms[id - 1];
-        //return currentLocation;
-
-        //}end GetRoom()
-
 
         public static Location GetRoomById(int id)
         {
@@ -123,16 +89,17 @@ namespace AdventureLibrary
         }
 
         public string RoomMap()
-        {
-            return $"\t\t\tNorth:{GetRoomById(IdNorth).Name}\n\n" +
+        {            
+            return $"\n\n\t\t\tNorth:{GetRoomById(IdNorth).Name}\n\n" +
                 $"\tWest:{GetRoomById(IdWest).Name}\n" +
                 $"\t\t\t\t\tEast:{GetRoomById(IdEast).Name}\n" +
-                $"\t\t\tSouth:{GetRoomById(IdSouth).Name}\n";
+                $"\t\t\tSouth:{GetRoomById(IdSouth).Name}\n";            
         }
 
         public static ConsoleKey InnMenu(ref Location currentRoom, Player user, ref bool adventureLoop, ref bool encounterLoop, ref bool newMonster)
         {
             ConsoleKey menuChoice;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("\nMake Your Next Move:\n\n" +
                                             "\tUpArrow - Move North\n" +
                                             "\tRightArrow - Move East\n" +
@@ -140,7 +107,7 @@ namespace AdventureLibrary
                                             "\tLeftArrow - Move West\n" +
                                             "\tP. - Player Info\n" +
                                             "\tE. - Exit\n\n");
-
+            Console.ResetColor();
             menuChoice = Console.ReadKey(true).Key;
 
             switch (menuChoice)
@@ -178,7 +145,8 @@ namespace AdventureLibrary
                     newMonster = true;
                     break;
                 default:
-                    Console.WriteLine("Unknown Command - Please try again.");
+                    //Console.WriteLine("Unknown Command - Please try again.");
+                    Console.Clear();
                     break;
             }//end switch
 
