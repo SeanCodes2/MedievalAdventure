@@ -8,6 +8,7 @@ namespace Project
     {
         static void Main(string[] args)
         {
+            //Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("\nMedieval Adventure\n\n");
 
             #region Player Choosing Name
@@ -15,32 +16,42 @@ namespace Project
             string name = Console.ReadLine();
             #endregion
 
-            #region Player Choosing Class 
+            #region Player Choosing Class            
+            bool scope = true;
+            int userInput = 0;
+            while (scope)
+            {
+                Console.Write("\nPlease select a class:\n\n" +
+                    "1. Balanced\t\tNo Change\n" +
+                    "2. Dexer\t\tHitchance +10 | MaxLife -5\n" +
+                    "3. Tank\t\t\tBlock +5 | MaxLife +10 | HitChance -5 | EscapeChance -10\n" +
+                    "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
+                    "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
 
-            //Customize race/name based on user input
-            var charClass = Enum.GetValues(typeof(CharacterClass));
-            int Index = 1;
+                bool success = int.TryParse(Console.ReadLine(), out userInput);
+                if (userInput < 6 && userInput > 0 && success)
+                {
+                    scope = false;
+                }
+                Console.Clear();
+            }
 
-            Console.Write("\nPlease select a class:\n\n" +
-                "1. Balanced\t\tNo Change\n" +
-                "2. Dexer\t\tHitchance +10 | MaxLife -5\n" +
-                "3. Tank\t\t\tBlock +5 | MaxLife +10 | HitChance -5 | EscapeChance -10\n" +
-                "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
-                "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
-
-            int userInput = int.Parse(Console.ReadLine()) - 1;//Subtract 1 to make zero based
-
-            CharacterClass playerClass = (CharacterClass)userInput;
+            CharacterClass playerClass = Player.GetClass(userInput);
             #endregion
 
             Weapon userWeapon = Weapon.GetWeapon(0);
-            Shield userShield = Shield.GetShield(0);
-            Location currentRoom = Location.GetRoomById(0);
+            Shield userShield = Shield.GetShield(0);                        
+            Location currentRoom = Location.GetRoomById(0);            
             Player user = new Player(name, playerClass, 50, 50, 60, 0, userWeapon, userShield, 50, 0, 40);
 
             Console.Clear();
 
-            Console.WriteLine($"\nWelcome {user.Name}! Your Adventure Awaits!\n\n");
+            Console.WriteLine($"\n\n\nWelcome {user.Name}! Your Adventure Awaits!\n" +
+                $"This is Where The story begins!!!\n" +
+                $"The Story Continues\n\n" +
+                $"(press any button)");
+            Console.ReadKey(true);
+            Console.Clear();
 
             bool adventureLoop = true;
             do
@@ -108,25 +119,27 @@ namespace Project
                     bool newMonster = false;
                     while (!newMonster)
                     {
-                        
+                        Console.ForegroundColor = ConsoleColor.Green;
+                                                
                         Console.WriteLine(currentRoom.RoomMap());
 
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"\nWelcome to the {currentRoom} - {currentRoom.Description}\n");
 
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine($"Current Adversary: {adversary.Name}\n");
+                        Console.ResetColor();
 
                         #region Inn Menu
                         if (currentRoom.ID == 0)
                         {
                             menuChoice = Location.InnMenu(ref currentRoom, user, ref adventureLoop, ref encounterLoop, ref newMonster);
-
-                        }//end room 1 IF
+                        }
                         #endregion
 
                         #region Provisioner Menu
                         else if (currentRoom.ID == 3)
                         {
-
                             Console.Write("\nMake Your Next Move:\n\n" +
                                 "\tUpArrow - Move North\n" +
                                 "\tRightArrow - Move East\n" +
@@ -306,6 +319,6 @@ namespace Project
 
         }//End Main()    
 
-       
+
     }//End Class
 }//End Namespace

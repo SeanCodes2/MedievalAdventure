@@ -99,7 +99,50 @@ namespace AdventureLibrary
             return EscapeChance;
         }
 
+        private static void ChooseClass(ref bool scope, ref int userInput)
+        {
+            while (scope)
+            {
+                Console.Write("\nPlease select a class:\n\n" +
+                    "1. Balanced\t\tNo Change\n" +
+                    "2. Dexer\t\tHitchance +10 | MaxLife -5\n" +
+                    "3. Tank\t\t\tBlock +5 | MaxLife +10 | HitChance -5 | EscapeChance -10\n" +
+                    "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
+                    "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
 
+                bool success = int.TryParse(Console.ReadLine(), out userInput);
+                if (userInput < 6 && userInput > 0 && success)
+                {
+                    scope = false;
+                }
+                Console.Clear();
+            }
+        }
+
+        public static CharacterClass GetClass(int userClassChoice)
+        {
+            CharacterClass playerClass = new CharacterClass();
+
+            switch (userClassChoice)
+            {
+                case 1:
+                    playerClass = CharacterClass.Balanced;
+                    break;
+                case 2:
+                    playerClass = CharacterClass.Dexer;
+                    break;
+                case 3:
+                    playerClass = CharacterClass.Tank;
+                    break;
+                case 4:
+                    playerClass = CharacterClass.Berzerker;
+                    break;
+                case 5:
+                    playerClass = CharacterClass.Peasant;
+                    break;                
+            }
+            return playerClass;
+        }
 
     }
 }
