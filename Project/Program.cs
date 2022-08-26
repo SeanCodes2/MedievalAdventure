@@ -8,12 +8,51 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            //Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("\nMedieval Adventure\n\n");
+            Console.WindowHeight = 60;
+            Console.WindowWidth = 140;
+            
+            Console.ForegroundColor=ConsoleColor.Blue;            
+            Console.WriteLine(@"
+
+                          ______________________________________
+                         //                                     \\
+                       <<            MEDIEVAL ADVENTURE           >>
+                         \\_____________________________________//
+
+");
+
+            Console.ForegroundColor=ConsoleColor.Gray;
+            Console.WriteLine(@"
+                                                o         _ _ _ _ _
+                                           _----|         I-I-I-I-I
+                        _ _ _ _ _ _      o  ----|     o   \~~`~'~~/
+                        ]-I-I-I-I-[ _----|      |_----|    |.    |
+                        \~`\~~~/'~/  ----|     / \----|    |  /^\|
+                         [*] ' __|       ^    / ^ \   ^    |_ |*||
+                         |__    ,|      / \  /    `\ / \   |  ===|
+                       __|  ___ ,|__   /    /=_=_=_=\   \  |,  __|
+                       I_I__I_I__I_I  (====(_________)___|_|_____|___
+                       \-\--|-|--/-/  |'    I~~[ ]~~I I_I__|IIII|_I_l
+                        | [ ]    '|   | [~] |_`_~_ _[  \-\--|-|--/-/
+                        |.   | |' |___|____`I_I_|_I_I___|---------|
+                       / \| [] ~ .|_|-|_|-|-|_|-|_|-|_|-| []   [] |
+                      <===>  |  ~.|-=-=-=-=-=-=-=-=-=-=-|~  |  ~ / \
+                      | []|`   []~||.|.|.|.|.|.|.|.|.|.||-~   ~ <===>
+                      | []| ` |   |/////////I\\\\\\\\\\||__. ~| |[*]I
+                      <===> ~   ' ||||| |   |   | ||||.||  []  ~<===>
+                       \T/  |~|-- ||||| | O | O | ||||.|| . |'~  \T/
+                        |     ~.~_||||| |~~~|~~~| ||||.|| | ~   | |
+                  __.../|' v . | .|||||/____|____\|||| /|. . | . .|\.\/_
+
+");
 
             #region Player Choosing Name
-            Console.WriteLine("Hello Adventurer! What is your name??\n");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+            Console.Write("\n\t\tHello Adventurer! What is your name??\n\n\t\t");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             string name = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             #endregion
 
             #region Player Choosing Class            
@@ -21,12 +60,12 @@ namespace Project
             int userInput = 0;
             while (scope)
             {
-                Console.Write("\nPlease select a class:\n\n" +
-                    "1. Balanced\t\tNo Change\n" +
-                    "2. Dexer\t\tHitchance +10 | MaxLife -5\n" +
-                    "3. Tank\t\t\tBlock +5 | MaxLife +10 | HitChance -5 | EscapeChance -10\n" +
-                    "4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
-                    "5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n");
+                Console.Write("\n\t\tPlease select a class:\n\n" +
+                    "\t\t1. Balanced\t\tNo Change\n" +
+                    "\t\t2. Dexer\t\tHitchance +10 | MaxLife -5\n" +
+                    "\t\t3. Tank\t\t\tBlock +5 | MaxLife +10 | HitChance -5 | EscapeChance -10\n" +
+                    "\t\t4. Berzerker\t\tDamage +5 | Block -10 | EscapeChance -10\n" +
+                    "\t\t5. Peasant:\t\tBlock -3 | EscapChance -3 | HitChance -3 | MaxLife -10\n\t\t");
 
                 bool success = int.TryParse(Console.ReadLine(), out userInput);
                 if (userInput < 6 && userInput > 0 && success)
@@ -43,19 +82,20 @@ namespace Project
             Shield userShield = Shield.GetShield(0);                        
             Location currentRoom = Location.GetRoomById(0);            
             Player user = new Player(name, playerClass, 50, 50, 60, 0, userWeapon, userShield, 50, 0, 40);
+            int userScore = 0;
 
             Console.Clear();
-
-            Console.WriteLine($"\n\n\nWelcome {user.Name}! Your Adventure Awaits!\n" +
-                $"This is Where The story begins!!!\n" +
-                $"The Story Continues\n\n" +
-                $"(press any button)");
+            Console.WriteLine($"\n\n\n\n\n\n\n\n\n\t\tWelcome {user.Name} the {user.PlayerClass}! Your Adventure Awaits!\n" +
+                $"\t\tThis is Where The story begins!!!\n" +
+                $"\t\tThe Story Continues\n\n" +
+                $"\t\t(press any button)");
             Console.ReadKey(true);
             Console.Clear();
+            Console.ResetColor();
 
-            bool adventureLoop = true;
-            do
-            {
+            //bool adventureLoop = true;
+            //do
+            //{
 
                 bool encounterLoop = true;
                 do
@@ -119,13 +159,12 @@ namespace Project
                     bool newMonster = false;
                     while (!newMonster)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                                                
+                        Console.ForegroundColor = ConsoleColor.Green;                                                
                         Console.WriteLine(currentRoom.RoomMap());
-
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"\nWelcome to the {currentRoom} - {currentRoom.Description}\n");
-
+                        Console.Write($"\nWelcome to the {currentRoom} - ");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine($"{currentRoom.Description}\n");
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine($"Current Adversary: {adversary.Name}\n");
                         Console.ResetColor();
@@ -133,7 +172,7 @@ namespace Project
                         #region Inn Menu
                         if (currentRoom.ID == 0)
                         {
-                            menuChoice = Location.InnMenu(ref currentRoom, user, ref adventureLoop, ref encounterLoop, ref newMonster);
+                            menuChoice = Location.InnMenu(ref currentRoom, user, /*ref adventureLoop*/ ref encounterLoop, ref newMonster);
                         }
                         #endregion
 
@@ -189,6 +228,7 @@ namespace Project
                                 case ConsoleKey.P:
                                     Console.Clear();
                                     Console.WriteLine(user);
+                                    Console.WriteLine($"Adversaries Defeated: {userScore}\n");
                                     Console.WriteLine(user.EquippedWeapon);
                                     Console.WriteLine(user.EquippedShield);
                                     break;
@@ -196,7 +236,7 @@ namespace Project
                                 case ConsoleKey.Escape:
                                     Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
                                     Console.Clear();
-                                    adventureLoop = false;
+                                    //adventureLoop = false;
                                     encounterLoop = false;
                                     newMonster = true;
                                     break;
@@ -229,18 +269,22 @@ namespace Project
                             switch (choice)
                             {
                                 case ConsoleKey.UpArrow:
+                                    MoveAttack(user, adversary, diceRoll);
                                     Location.MoveNorth(ref currentRoom);
                                     newMonster = true;
                                     break;
                                 case ConsoleKey.RightArrow:
+                                    MoveAttack(user, adversary, diceRoll);
                                     Location.MoveEast(ref currentRoom);
                                     newMonster = true;
                                     break;
                                 case ConsoleKey.DownArrow:
+                                    MoveAttack(user, adversary, diceRoll);
                                     Location.MoveSouth(ref currentRoom);
                                     newMonster = true;
                                     break;
                                 case ConsoleKey.LeftArrow:
+                                    MoveAttack(user, adversary, diceRoll);
                                     Location.MoveWest(ref currentRoom);
                                     newMonster = true;
                                     break;
@@ -256,6 +300,7 @@ namespace Project
                                         Console.Beep(700, 500);
                                         Console.ResetColor();
                                         Console.WriteLine($"\nYou collect 3 gold.");
+                                        userScore++;
                                         user.Gold = user.Gold + 3;
                                         encounterLoop = false; //get a new room and monster
                                         newMonster = true;
@@ -263,7 +308,8 @@ namespace Project
                                     if (user.Life <= 0)
                                     {
                                         Console.WriteLine("Dude.... you Died!\a");
-                                        adventureLoop = false;
+                                        Console.WriteLine($"Number of Victories: {userScore}");
+                                        //adventureLoop = false;
                                         encounterLoop = false;
                                     }
                                     Console.ReadKey(true);
@@ -276,19 +322,19 @@ namespace Project
                                         //Console.WriteLine("You Try to Run Away...");
                                         Combat.DoAttack(adversary, user);
                                         Console.WriteLine($"{adversary.Name} attacks you as you flee...");
-                                        Console.ReadKey();
-                                        newMonster = true;
+                                        Console.ReadKey();                                        
                                     }
                                     else
                                     {
                                         Console.WriteLine("You Run Away....");
                                         Console.ReadKey();
-                                        newMonster = true;
                                     }
+                                        newMonster = true;
                                     break;
                                 case ConsoleKey.P:
                                     Console.Clear();
                                     Console.WriteLine(user);
+                                    Console.WriteLine($"Adversaries Defeated: {userScore}\n");
                                     Console.WriteLine(user.EquippedWeapon);
                                     Console.WriteLine(user.EquippedShield);
                                     Console.ReadKey();
@@ -300,7 +346,7 @@ namespace Project
                                     break;
                                 case ConsoleKey.E:
                                 case ConsoleKey.Escape:
-                                    adventureLoop = false;
+                                    //adventureLoop = false;
                                     encounterLoop = false;
                                     newMonster = true;
 
@@ -314,11 +360,19 @@ namespace Project
                         }
                         #endregion
                     }
-                } while (encounterLoop && adventureLoop);
-            } while (adventureLoop);
+                } while (encounterLoop /*&& adventureLoop*/);
+            //} while (adventureLoop);
 
         }//End Main()    
 
-
+        private static void MoveAttack(Player user, Adversary adversary, int diceRoll)
+        {
+            if (diceRoll < user.EscapeChance)
+            {
+                Combat.DoAttack(adversary, user);
+                Console.WriteLine($"{adversary.Name} attacks you as you flee...");
+               
+            }
+        }
     }//End Class
 }//End Namespace
