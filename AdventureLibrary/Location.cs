@@ -89,14 +89,15 @@ namespace AdventureLibrary
         }
 
         public string RoomMap()
-        {            
-            return $"\n\n\t\t\tNorth:{GetRoomById(IdNorth).Name}\n\n" +
-                $"\tWest:{GetRoomById(IdWest).Name}\n" +
-                $"\t\t\t\t\tEast:{GetRoomById(IdEast).Name}\n" +
-                $"\t\t\tSouth:{GetRoomById(IdSouth).Name}\n";            
+        {return
+            $"\n\n\t\t\tNorth:{GetRoomById(IdNorth).Name}\n\n" +
+            $"\tWest:{GetRoomById(IdWest).Name}\n" +
+            $"\t\t\t\t\tEast:{GetRoomById(IdEast).Name}\n" +
+            $"\t\t\tSouth:{GetRoomById(IdSouth).Name}\n";
+
         }
 
-        public static ConsoleKey InnMenu(ref Location currentRoom, Player user, ref bool adventureLoop, ref bool encounterLoop, ref bool newMonster)
+        public static ConsoleKey InnMenu(ref Location currentRoom, Player user, /*ref bool adventureLoop,*/ ref bool encounterLoop, ref bool newMonster)
         {
             ConsoleKey menuChoice;
             Console.ForegroundColor = ConsoleColor.White;
@@ -140,7 +141,7 @@ namespace AdventureLibrary
                     Console.WriteLine("\n\nNoone Likes a Quitter!\n\n");
                     Console.ReadKey(true);
                     Console.Clear();
-                    adventureLoop = false;
+                    //adventureLoop = false;
                     encounterLoop = false;
                     newMonster = true;
                     break;
@@ -155,7 +156,7 @@ namespace AdventureLibrary
 
         public static void MoveNorth(ref Location currentRoom)
         {            
-            Console.WriteLine("You Move North\n" + "Press any Key to Continue");
+            Console.WriteLine("You Move North\n" + "Press any Key to Continue");            
             Console.ReadKey();
             Console.Clear();
             currentRoom = currentRoom.MoveRoom(currentRoom.IdNorth);           
