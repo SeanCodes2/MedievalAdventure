@@ -48,7 +48,7 @@ namespace AdventureLibrary
         }
         public static Weapon GetWeapon(int index)
         {
-            Weapon butterKnife = new Weapon("Butter Knife", 7, 2, 8, 0, 0);
+            Weapon butterKnife = new Weapon("Butter Knife", 5, 1, 8, 0, 0);
             Weapon katana = new Weapon("Katana", 12, 4, 9, 0, 15);
             Weapon dagger = new Weapon("Dagger", 8, 4, 10, 0, 10);
             Weapon spear = new Weapon("Short Spear", 15, 4, 10, 0, 20);

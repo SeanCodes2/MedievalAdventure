@@ -36,7 +36,7 @@ namespace AdventureLibrary
         public static FoeMtnPass GetMtnPassFoe()
         {
             FoeMtnPass orc = new FoeMtnPass("Orc", 54, 54, 12, 3, 65, 10, false);
-            FoeMtnPass orcBrute = new FoeMtnPass("Orc Brute", 59, 59, 14, 5, 65, 13, false);
+            FoeMtnPass orcBrute = new FoeMtnPass("Orc Brute", 59, 59, 14, 5, 65, 15, false);
             FoeMtnPass orcCaptain = new FoeMtnPass("Orc Captain", 65, 65, 18, 6, 70, 20, false);
             FoeMtnPass OrcLord = new FoeMtnPass("Orc Lord", 70, 70, 20, 8, 70, 25, false);
             List<FoeMtnPass> mtnPassFoes = new List<FoeMtnPass>()
