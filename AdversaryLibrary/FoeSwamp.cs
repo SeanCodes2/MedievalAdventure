@@ -25,10 +25,10 @@ namespace AdventureLibrary
 
         public static FoeSewer GetSwampFoe()
         {
-            FoeSewer turtoise = new FoeSewer("Turtoise", 23, 23, 5, 2, 40, 5, false);
-            FoeSewer reaper = new FoeSewer("Reaper", 28, 28, 5, 2, 40, 5, false);
-            FoeSewer bogThing = new FoeSewer("Bog Thing", 31, 31, 6, 3, 40, 6, false);
-            FoeSewer swampTenticle = new FoeSewer("Swamp Tenticle", 36, 36, 6, 3, 40, 6, false);
+            FoeSewer turtoise = new FoeSewer("Turtoise", 23, 23, 6, 2, 45, 5, false);
+            FoeSewer reaper = new FoeSewer("Reaper", 28, 28, 6, 2, 45, 5, false);
+            FoeSewer bogThing = new FoeSewer("Bog Thing", 31, 31, 7, 3, 50, 6, false);
+            FoeSewer swampTenticle = new FoeSewer("Swamp Tenticle", 36, 36, 7, 3, 50, 6, false);
             List<FoeSewer> swampFoes = new List<FoeSewer>()
                 {turtoise,reaper,bogThing,swampTenticle};
 
