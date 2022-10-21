@@ -88,7 +88,7 @@ namespace AdversaryLibrary
                         Console.WriteLine($"\nYou collect 3 gold.");
                         userScore++;
                         user.Gold = user.Gold + 3;
-                        encounterLoop = false; //get a new room and monster
+                        //encounterLoop = false; //get a new room and monster
                         newMonster = true;
                     }
                     if (user.Life <= 0)

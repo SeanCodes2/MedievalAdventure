@@ -86,9 +86,7 @@ namespace Project
 
             Console.Clear();
             Console.WriteLine($"\n\n\n\n\n\n\n\n\n\t\tWelcome {user.Name} the {user.PlayerClass}! Your Adventure Awaits!\n" +
-                $"\t\tThis is Where The story begins!!!\n" +
-                $"\t\tThe Story Continues\n\n" +
-                $"\t\t(press any button)");
+               $"\t\t(press any button)");
             Console.ReadKey(true);
             Console.Clear();
             Console.ResetColor();
